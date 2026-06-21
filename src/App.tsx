@@ -329,8 +329,10 @@ export default function App() {
             </div>
 
             {/* View navigation Tabs */}
-            <div className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
+            <div className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl" role="tablist">
               <button
+                role="tab"
+                aria-selected={currentView === 'tracker'}
                 onClick={() => setCurrentView('tracker')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
                   currentView === 'tracker' 
@@ -338,11 +340,13 @@ export default function App() {
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <Activity size={13} />
+                <Activity size={13} aria-hidden="true" />
                 <span>Painel</span>
               </button>
               
               <button
+                role="tab"
+                aria-selected={currentView === 'history'}
                 onClick={() => setCurrentView('history')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
                   currentView === 'history' 
@@ -351,7 +355,7 @@ export default function App() {
                 }`}
                 id="history-tab-button"
               >
-                <HistoryIcon size={13} />
+                <HistoryIcon size={13} aria-hidden="true" />
                 <span>Histórico</span>
               </button>
             </div>
@@ -378,6 +382,7 @@ export default function App() {
                 {/* Clean Toggle Switch between A & B */}
                 <div className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-44">
                   <button
+                    aria-pressed={activeRoutine === 'A'}
                     onClick={() => {
                       setActiveRoutine('A');
                       setSearchQuery('');
@@ -392,6 +397,7 @@ export default function App() {
                   </button>
                   
                   <button
+                    aria-pressed={activeRoutine === 'B'}
                     onClick={() => {
                       setActiveRoutine('B');
                       setSearchQuery('');
@@ -451,7 +457,7 @@ export default function App() {
 
             {/* Quick Search and Filter utilities */}
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
+              <span aria-hidden="true" className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
                 <Search size={15} />
               </span>
               <input
@@ -459,14 +465,16 @@ export default function App() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filtrar por exercício, músculo ou aparelho..."
+                aria-label="Buscar exercícios"
                 className="w-full bg-[#0a0a0a] border border-[#222] rounded-xl pl-9.5 pr-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#444] transition-colors"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
+                  aria-label="Limpar busca"
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
                 >
-                  <X size={14} />
+                  <X size={14} aria-hidden="true" />
                 </button>
               )}
             </div>
