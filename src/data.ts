@@ -14,7 +14,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Quadríceps',
     targetMuscles: ['Reto Femoral', 'Vasto Lateral', 'Vasto Medial'],
     equipment: 'Aparelho Extensor de Pernas (Polia)',
-    images: ['https://cdn.awsli.com.br/800x800/363/363752/produto/15234411/d107f8452a.jpg', 'http://irontechfitness.com.br/cdn/shop/files/ExtensorcPolia.jpg?v=1731528700', 'https://http2.mlstatic.com/D_NQ_NP_984225-MLB79968424937_102024-O.webp'],
+    images: ['https://cdn.awsli.com.br/800x800/363/363752/produto/15234411/d107f8452a.jpg', 'https://irontechfitness.com.br/cdn/shop/files/ExtensorcPolia.jpg?v=1731528700', 'https://http2.mlstatic.com/D_NQ_NP_984225-MLB79968424937_102024-O.webp'],
     instructions: [
       'Ajuste o encosto de modo que a dobra dos joelhos coincida com a borda do assento.',
       'Coloque o rolo almofadado logo acima do tornozelo.',
@@ -52,7 +52,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Quadríceps & Glúteos',
     targetMuscles: ['Quadríceps', 'Glúteo Máximo', 'Panturrilhas'],
     equipment: 'Leg Press Horizontal (Cabos)',
-    images: ['https://static.wixstatic.com/media/2edbed_6b4ad613c96a47d6af22b0e284ab5a32~mv2.gif/v1/fill/w_980,h_980,al_c,usm_0.66_1.00_0.01,pstr/2edbed_6b4ad613c96a47d6af22b0e284ab5a32~mv2.gif', 'https://img.olx.com.br/images/95/959583581871693.jpg', 'https://pro-fitsport.com/wp-content/uploads/2019/10/pic-1mth085_06.jpg'],
+    images: ['https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Leg_press_machine.jpg/800px-Leg_press_machine.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Young_man_using_a_leg_press_machine_at_the_gym.jpg/800px-Young_man_using_a_leg_press_machine_at_the_gym.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Leg_Press_2.jpg/800px-Leg_Press_2.jpg'],
     instructions: [
       'Ajuste a distância do assento para que comece com os joelhos em torno de 90°.',
       'Apoie os pés na plataforma na largura do quadril.',
@@ -90,7 +90,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Coxas & Glúteos',
     targetMuscles: ['Quadríceps', 'Isquiotibiais', 'Glúteo Máximo', 'Core'],
     equipment: 'Peso Corporal ou Barra Livre',
-    images: ['https://http2.mlstatic.com/D_NQ_NP_812411-MLB111333389001_052026-O.webp', 'https://img.irroba.com.br/fit-in/1000x1000/filters:fill(fff):quality(80)/natuoaeu/catalog/produtos-2025/academia/equipamentos-de-musculacao/sku-69-barra-guiada-livre-consport/barra-guiada-livre-consport-1.jpg', 'https://i.ytimg.com/vi/rM6SDUdl9fs/maxresdefault.jpg'],
+    images: ['https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/1st_Lt._Nsikakabasi_Ndem_barbell_squats.jpg/800px-1st_Lt._Nsikakabasi_Ndem_barbell_squats.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Unilateral_barbell_back_squat_squatting.jpg/800px-Unilateral_barbell_back_squat_squatting.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Barbell_pad_back_squat.jpg/800px-Barbell_pad_back_squat.jpg'],
     instructions: [
       'Fique em pé com os pés ligeiramente mais largos que os ombros, virados para fora (15°).',
       'Inicie o movimento projetando o quadril para trás, como se fosse sentar em uma cadeira.',
@@ -128,7 +128,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Dorsais',
     targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Bíceps Braquial'],
     equipment: 'Máquina de Puxada Convergente / Barra Pulley',
-    images: ['https://ajustfitness.com.br/wp-content/uploads/Puxada-Alta-Articulada-SL-2030-ok-768x768.jpg', 'https://oficialsport.com.br/wp-content/uploads/PUXADA-ALTA-CONVERGENTE-scaled.webp', 'https://www.bhfitnessequipamentos.com.br/doutor/uploads/6/produtos/2025/01/cover-puxada-alta-convergente-a4618de554.jpg'],
+    images: ['https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Diverging_Lat_Pulldown_Machine.jpg/800px-Diverging_Lat_Pulldown_Machine.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Amer-Lat-Pulldown.jpg/800px-Amer-Lat-Pulldown.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Girl_doing_lat_pulldown_exercise.jpg/800px-Girl_doing_lat_pulldown_exercise.jpg'],
     instructions: [
       'Ajuste o apoio de coxas para firmar o quadril.',
       'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
@@ -264,7 +264,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Coxas & Glúteos',
     targetMuscles: ['Adutores (Interno de Coxa)', 'Glúteo Máximo', 'Quadríceps'],
     equipment: 'Halter Pesado ou Kettlebell',
-    images: ['https://down-br.img.susercontent.com/file/sg-11134201-7qvef-lh6b5k25qsqv1a', 'https://images.tcdn.com.br/img/img_prod/1042861/kit_academia_fitness_com_2_halteres_de_2kg_e_1_kettlebell_de_4kg_1655_2_c46d19b7f933e66ed69b1c607f8039e3.jpg', 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/5471c964-eb0e-42d3-b3ac-ecbcbc4ca3ba.__CR0,0,970,600_PT0_SX970_V1___.jpg'],
+    images: ['https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Atleta_J%C3%BAlio_Ferraz_no_Campeonato_Brasileiro_2017.jpg/800px-Atleta_J%C3%BAlio_Ferraz_no_Campeonato_Brasileiro_2017.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Deadlift_WDFPF.jpg/800px-Deadlift_WDFPF.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/The_Stone_Bay_Bar_Benders_120328-M-EL893-004.jpg/800px-The_Stone_Bay_Bar_Benders_120328-M-EL893-004.jpg'],
     instructions: [
       'Fique de pé com um afastamento bem largo das pernas (posição de sumô).',
       'Aponte as pontas dos pés para fora em um ângulo confortável (~45°).',
@@ -283,7 +283,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Panturrilhas',
     targetMuscles: ['Gastrocnêmio Lateral', 'Gastrocnêmio Medial', 'Sóleu'],
     equipment: 'Degrau, Gaiola de Panturrilha ou Máquina em Pé',
-    images: ['https://cdn.fisiculturismo.com.br/monthly_2021_01/panturrilha-em-pe-na-maquina-final.jpg.f4593e71d2b363fe9996773a417b8aec.jpg', 'https://www.xfitnessequipamentos.com.br/wp-content/uploads/2021/04/panturrilha-em-pe-maquina2-600x600.jpg', 'https://i.ytimg.com/vi/95MEoNZKaP0/maxresdefault.jpg'],
+    images: ['https://www.bodybuilding.com/images/2020/xdb/original/xdb-15s-standing-calf-raise-m2-16x9.jpg', 'https://www.xfitnessequipamentos.com.br/wp-content/uploads/2021/04/panturrilha-em-pe-maquina2-600x600.jpg', 'https://i.ytimg.com/vi/95MEoNZKaP0/maxresdefault.jpg'],
     instructions: [
       'Apoie apenas a ponta dos pés na borda de um degrau ou plataforma.',
       'Se posicione ereto. Use o corrimão para equilíbrio se for livre.',
@@ -340,7 +340,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Peitoral Superior & Ombros',
     targetMuscles: ['Porção Clavicular do Peitoral', 'Deltoide Anterior', 'Tríceps'],
     equipment: 'Máquina de Supino Convergente Inclinado (Hammer)',
-    images: ['https://www.kikos.com.br/media/catalog/product/cache/9a42fbf5bf4693a5288cbf9975a24d98/h/f/hf-2013---supino-inclinado---linha-hammer-force---kikos-pro-_site_.jpg', 'https://static.wixstatic.com/media/2edbed_68da0d35b2994cb1acf7a3fec4116081~mv2.webp/v1/fill/w_360,h_360,al_c,q_80,enc_avif,quality_auto/2edbed_68da0d35b2994cb1acf7a3fec4116081~mv2.webp', 'https://http2.mlstatic.com/D_NQ_NP_706630-MLB80121748506_112024-O-banco-supino-inclinado-convergente-profissional-academia.webp'],
+    images: ['https://www.kikos.com.br/media/catalog/product/cache/9a42fbf5bf4693a5288cbf9975a24d98/h/f/hf-2013---supino-inclinado---linha-hammer-force---kikos-pro-_site_.jpg', 'https://http2.mlstatic.com/D_NQ_NP_706630-MLB80121748506_112024-O-banco-supino-inclinado-convergente-profissional-academia.webp', 'https://images.tcdn.com.br/img/img_prod/450774/supino_inclinado_articulada_ultrawod_1435_1_20201211171804.png'],
     instructions: [
       'Ajuste o banco de forma que as pegadas estejam no nível superior do peitoral.',
       'Mantenha as escápulas juntas e empurre as manoplas para cima e para frente acompanhando o arco.',

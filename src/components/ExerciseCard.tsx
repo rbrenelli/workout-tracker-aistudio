@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, Timer, Trophy, Dumbbell, ChevronDown, ChevronUp, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Exercise } from '../types';
-import { ExerciseIllustration } from './ExerciseIllustration';
 
 interface ExerciseCardProps {
   exercise: Exercise;
