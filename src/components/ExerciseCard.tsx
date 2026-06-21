@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, Timer, Trophy, Dumbbell, ChevronDown, ChevronUp, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Exercise } from '../types';
-import { ExerciseIllustration } from './ExerciseIllustration';
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -45,7 +44,10 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
       }}
     >
       {/* Top Banner Section */}
-      <div className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800">
+      <div
+        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors"
+        onClick={() => setShowGuide(!showGuide)}
+      >
         <div className="flex-1">
           {/* Muscle Category Pin */}
           <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
@@ -76,7 +78,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
         <div className="flex items-center gap-1.5 shrink-0">
           {/* Quick Rest Timer Trigger */}
           <button
-            onClick={() => onStartTimer(60)}
+            onClick={(e) => { e.stopPropagation(); onStartTimer(60); }}
             className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333]"
             title="Iniciar descanso de 60 segundos"
             aria-label="Cronômetro de descanso"
@@ -85,14 +87,13 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           </button>
 
           {/* Expand Details Trigger */}
-          <button
-            onClick={() => setShowGuide(!showGuide)}
+          <div
             className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333]"
             title="Visualizar instruções e aparelho"
             aria-label="Exibir guia do aparelho"
           >
             {showGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-          </button>
+          </div>
         </div>
       </div>
 
@@ -107,20 +108,24 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             className="overflow-hidden bg-[#050505] border-t border-[#222]"
           >
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Left Column: Visual SVG Aid */}
+              {/* Left Column: Visual Images */}
               <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-3 flex flex-col justify-between min-h-[160px] relative">
-                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1 select-none font-bold">
-                  Identificador de Aparelho
+                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-2 select-none font-bold text-center">
+                  Aparelho a ser utilizado:
                 </div>
-                
-                <div className="flex-1 flex items-center justify-center">
-                  <ExerciseIllustration svgType={exercise.svgType} accentColor={accentColor} />
-                </div>
-
-                <div className="mt-2 text-center">
-                  <span className="text-[11px] font-sans font-medium text-zinc-400 uppercase tracking-wide">
+                <div className="text-center mb-4">
+                  <span className="text-[14px] font-sans font-bold text-zinc-200 uppercase tracking-wide">
                     {exercise.equipment}
                   </span>
+                </div>
+
+                <div className="flex-1 flex flex-col gap-2 items-center justify-center">
+                  {exercise.images && exercise.images.map((imgUrl, index) => (
+                    <img key={index} src={imgUrl} alt={`${exercise.equipment} ${index + 1}`} className="max-w-full h-auto rounded-lg shadow-md max-h-[200px] object-contain bg-[#111] p-1 border border-[#333]" />
+                  ))}
+                  {(!exercise.images || exercise.images.length === 0) && (
+                     <div className="text-zinc-500 text-xs text-center py-8">Imagens indisponíveis</div>
+                  )}
                 </div>
               </div>
 
