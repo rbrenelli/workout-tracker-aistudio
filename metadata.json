@@ -1,0 +1,6 @@
+{
+  "name": "Workout Tracker & Equipment Guide",
+  "description": "An interactive, mobile-first workout tracker and gym equipment guide with Série A & Série B routines, local storage persistence, rest timers, and dark mode for gym lighting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
