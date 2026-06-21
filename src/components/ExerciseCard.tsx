@@ -166,9 +166,10 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
         {/* Input for Weight Carga */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <span className="text-[9.5px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1">Carga</span>
+            <label htmlFor={`weight-input-${exercise.id}`} className="text-[9.5px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1">Carga</label>
             <div className="relative flex items-center w-28">
               <input
+                id={`weight-input-${exercise.id}`}
                 type="text"
                 inputMode="decimal"
                 value={session.weight}
@@ -176,7 +177,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                 placeholder={previousCarga || "0"}
                 className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-sm font-black focus:outline-none transition-colors"
               />
-              <span className="absolute right-2.5 text-[10px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
+              <span aria-hidden="true" className="absolute right-2.5 text-[10px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
             </div>
           </div>
 
@@ -190,10 +191,11 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
         {/* Satisfying checkbox for the whole exercise */}
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-zinc-500 mr-1 hidden xs:block">
+          <span aria-hidden="true" className="text-[10px] font-sans font-bold uppercase tracking-widest text-zinc-500 mr-1 hidden xs:block">
             {session.completed ? 'CONCLUÍDO' : 'FEITO'}
           </span>
           <button
+            aria-pressed={session.completed}
             onClick={() => onExerciseChange(exercise.id, 'completed', !session.completed)}
             aria-label={`Marcar exercício ${exercise.name} como concluído`}
             className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border ${
@@ -206,7 +208,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
               boxShadow: session.completed ? `0 0 16px ${accentColor}40` : 'none'
             }}
           >
-            <Check size={18} strokeWidth={4} className={session.completed ? 'text-black' : 'text-zinc-600'} />
+            <Check size={18} strokeWidth={4} className={session.completed ? 'text-black' : 'text-zinc-600'} aria-hidden="true" />
           </button>
         </div>
       </div>
