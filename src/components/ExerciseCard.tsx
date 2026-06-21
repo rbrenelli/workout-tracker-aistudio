@@ -45,6 +45,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
     >
       {/* Top Banner Section */}
       <div
+        role="button"
         className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors"
         onClick={() => setShowGuide(!showGuide)}
       >

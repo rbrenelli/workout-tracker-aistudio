@@ -15,7 +15,8 @@ export interface Exercise {
   equipment: string;
   instructions: string[];
   tips: string;
-  svgType: string; images?: string[]; // ID to render specialized SVG diagrams
+  svgType: string; // ID to render specialized SVG diagrams
+  images?: string[];
 }
 
 export interface ExerciseSession {
