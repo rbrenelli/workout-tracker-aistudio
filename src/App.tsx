@@ -321,10 +321,10 @@ export default function App() {
                 <Dumbbell size={22} className="rotate-[-45deg]" />
               </div>
               <div>
-                <h1 className="text-md font-display font-black text-white tracking-wider flex items-center gap-1 uppercase">
-                  CORE FIT <span className="text-[10px] bg-[#1a1a1a] text-[#ccff00] font-mono font-medium tracking-normal px-1.5 py-0.2 rounded border border-[#333]">PRO</span>
+                <h1 className="text-base font-display font-black text-white tracking-wider flex items-center gap-1 uppercase">
+                  CORE FIT <span className="text-[11px] bg-[#1a1a1a] text-[#ccff00] font-mono font-medium tracking-normal px-1.5 py-0.2 rounded border border-[#333]">PRO</span>
                 </h1>
-                <p className="text-[10.5px] font-sans text-zinc-400 font-bold uppercase tracking-wider">GUIA E PAINEL DE TREINO</p>
+                <p className="text-[12px] font-sans text-zinc-400 font-bold uppercase tracking-wider">GUIA E PAINEL DE TREINO</p>
               </div>
             </div>
 
@@ -371,8 +371,8 @@ export default function App() {
               
               <div className="flex items-center justify-between gap-3">
                 <div className="flex flex-col">
-                  <span className="text-[10.5px] font-sans text-zinc-500 uppercase font-black tracking-widest">Mudar Ficha de Treino</span>
-                  <span className="text-xs font-mono text-zinc-600 font-medium tracking-tight">Período Ativo</span>
+                  <span className="text-xs font-sans text-zinc-500 uppercase font-black tracking-widest">Mudar Ficha de Treino</span>
+                  <span className="text-[13px] font-mono text-zinc-600 font-medium tracking-tight">Período Ativo</span>
                 </div>
                 
                 {/* Clean Toggle Switch between A & B */}
@@ -422,15 +422,15 @@ export default function App() {
                   </h2>
                 </div>
                 
-                <span className="text-[11px] font-mono text-zinc-400 bg-[#111] border border-[#222] px-2 py-0.5 rounded">
+                <span className="text-[12.5px] font-mono text-zinc-400 bg-[#111] border border-[#222] px-2 py-0.5 rounded">
                   {exercises.length} Aparelhos
                 </span>
               </div>
 
               {/* Completion Progress Gauge */}
               <div className="space-y-1.5 select-none">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-zinc-500 font-sans font-bold uppercase tracking-wider text-[10px]">Meta do treino de hoje</span>
+                <div className="flex justify-between items-center text-[13.5px]">
+                  <span className="text-zinc-500 font-sans font-bold uppercase tracking-wider text-[11px]">Meta do treino de hoje</span>
                   <span className="font-mono text-zinc-200 font-bold">
                     {completedExercises} de {totalExercises} aparelhos ({percent}%)
                   </span>
@@ -451,15 +451,15 @@ export default function App() {
 
             {/* Quick Search and Filter utilities */}
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
-                <Search size={15} />
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+                <Search size={16} />
               </span>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filtrar por exercício, músculo ou aparelho..."
-                className="w-full bg-[#0a0a0a] border border-[#222] rounded-xl pl-9.5 pr-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#444] transition-colors"
+                className="w-full bg-[#0a0a0a] border border-[#222] rounded-xl pl-10 pr-4 py-3 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#444] transition-colors"
               />
               {searchQuery && (
                 <button

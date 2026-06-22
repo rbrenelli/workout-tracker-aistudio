@@ -110,7 +110,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
   if (!isOpen) return null;
 
   // Circular calculations
-  const radius = 45;
+  const radius = 75;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (timeLeft / duration) * circumference;
 
@@ -195,13 +195,13 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-xs font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222]"
+                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-sm font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222]"
                 title="Minimizar cronômetro para persistir na tela"
               >
                 <Minimize2 size={14} />
                 <span>Minimizar</span>
               </button>
-              <h3 className="text-md font-display font-medium text-zinc-300">Tempo de Descanso</h3>
+              <h3 className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
               <button
                 onClick={onClose}
                 className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222]"
@@ -248,14 +248,14 @@ export const RestTimer: React.FC<RestTimerProps> = ({
                     className="flex flex-col items-center"
                   >
                     <BellDot className="mb-1" style={{ color: accentColor }} size={32} />
-                    <span className="text-xl font-display font-bold text-white uppercase tracking-wider">Treinar!</span>
+                    <span className="text-2xl font-display font-bold text-white uppercase tracking-wider">Treinar!</span>
                   </motion.div>
                 ) : (
                   <>
-                    <span className="text-4xl font-mono font-bold text-white tracking-tight leading-none">
+                    <span className="text-5xl font-mono font-bold text-white tracking-tight leading-none">
                       {formatTime(timeLeft)}
                     </span>
-                    <span className="text-[10px] uppercase font-display font-medium text-zinc-400 tracking-widest mt-2">
+                    <span className="text-xs uppercase font-display font-semibold text-zinc-400 tracking-widest mt-2.5">
                       segundos restantes
                     </span>
                   </>
@@ -320,7 +320,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             </div>
 
             {/* Small motivative tip */}
-            <p className="text-[11px] text-zinc-500 mt-4 italic font-sans leading-relaxed">
+            <p className="text-xs text-zinc-500 mt-4 italic font-sans leading-relaxed">
               Use o intervalo para respirar fundo, se hidratar e focar na próxima série.
             </p>
           </motion.div>

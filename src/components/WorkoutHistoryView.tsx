@@ -54,9 +54,9 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
             <Award size={24} />
           </div>
           <div>
-            <h3 className="text-sm font-display font-black text-white uppercase tracking-wider">Histórico de Treino</h3>
-            <p className="text-xs text-zinc-400 mt-0.5 font-sans">
-              Você realizou <span className="text-amber-400 font-bold font-mono text-sm">{history.length}</span> treinos no total.
+            <h3 className="text-base font-display font-black text-white uppercase tracking-wider">Histórico de Treino</h3>
+            <p className="text-[13px] text-zinc-400 mt-0.5 font-sans">
+              Você realizou <span className="text-amber-400 font-bold font-mono text-[15px]">{history.length}</span> treinos no total.
             </p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                 setTimeout(() => setConfirmClear(false), 4000); // Disarm after 4s
               }
             }}
-            className={`px-3 py-1.5 rounded text-xs font-semibold font-display transition-all ${
+            className={`px-3 py-1.5 rounded text-sm font-semibold font-display transition-all ${
               confirmClear 
                 ? 'bg-red-600 text-white animate-pulse font-bold' 
                 : 'bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] border border-[#333]'
@@ -122,10 +122,10 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                     </div>
                     
                     <div>
-                      <h4 className="text-xs font-display font-bold text-zinc-200">
+                      <h4 className="text-[13.5px] font-display font-bold text-zinc-200">
                         {routineLabel}
                       </h4>
-                      <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 font-sans mt-0.5">
+                      <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 font-sans mt-0.5">
                         <Calendar size={11} className="text-zinc-500" />
                         <span>{entry.date}</span>
                       </div>
@@ -134,7 +134,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
 
                   <div className="flex items-center gap-2">
                     {/* Completion indicator */}
-                    <span className="text-[10px] font-mono font-bold text-zinc-400 bg-[#111] px-2 py-0.5 rounded border border-[#222]">
+                    <span className="text-[11.5px] font-mono font-bold text-zinc-400 bg-[#111] px-2 py-0.5 rounded border border-[#222]">
                       {entry.completedExercisesCount}/{entry.totalExercisesCount} aparelhos
                     </span>
                     
@@ -156,7 +156,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                       className="overflow-hidden bg-[#050505] border-t border-[#222]"
                     >
                       <div className="p-3 space-y-3">
-                        <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-black select-none">
+                        <div className="text-[11.5px] font-mono text-zinc-500 uppercase tracking-widest font-black select-none">
                           Histórico de Cargas do Treino:
                         </div>
 
@@ -172,23 +172,23 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                               <div key={exId} className="bg-[#0a0a0a] rounded-lg p-2.5 border border-[#222] flex items-center justify-between gap-4">
                                 <div className="flex-1">
                                   <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                                    <span className="text-xs font-display font-bold text-zinc-200">
+                                    <span className="text-[13.5px] font-display font-bold text-zinc-200">
                                       {getExerciseName(exId)}
                                     </span>
-                                    <span className="text-[9px] font-mono font-bold text-zinc-450 bg-[#111] border border-[#222] px-1.5 py-0.2 rounded">
+                                    <span className="text-[10px] font-mono font-bold text-zinc-450 bg-[#111] border border-[#222] px-1.5 py-0.2 rounded">
                                       {getExerciseGroup(exId)}
                                     </span>
                                   </div>
-                                  <div className="text-[11px] text-zinc-400 font-sans">
+                                  <div className="text-xs text-zinc-400 font-sans">
                                     Meta sugerida: <span className="font-mono text-zinc-300 font-medium">{metaExercise ? `${metaExercise.defaultSets}x ${metaExercise.defaultReps}` : '--'}</span>
                                   </div>
                                 </div>
 
                                 <div className="text-right space-y-1">
-                                  <div className="text-[12px] font-mono font-black text-amber-500">
+                                  <div className="text-[13.5px] font-mono font-black text-amber-500">
                                     {session.weight ? `${session.weight} kg` : 'Sem Carga'}
                                   </div>
-                                  <div className="text-[10px] uppercase font-sans font-black tracking-wider">
+                                  <div className="text-[11px] uppercase font-sans font-black tracking-wider">
                                     {session.completed ? (
                                       <span className="text-emerald-450">✓ Feito</span>
                                     ) : (
@@ -205,7 +205,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                         <div className="flex justify-end pt-1">
                           <button
                             onClick={() => onDeleteEntry(entry.id)}
-                            className="bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-2.5 py-1.5 rounded-lg text-[11px] font-display font-medium transition-colors flex items-center gap-1.5"
+                            className="bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-display font-medium transition-colors flex items-center gap-1.5"
                           >
                             <Trash2 size={12} />
                             <span>Remover Registro</span>
