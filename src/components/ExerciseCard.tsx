@@ -121,7 +121,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
                 <div className="flex-1 flex flex-col gap-2 items-center justify-center">
                   {exercise.images && exercise.images.map((imgUrl, index) => (
-                    <img key={index} src={imgUrl} alt={`${exercise.equipment} ${index + 1}`} className="max-w-full h-auto rounded-lg shadow-md max-h-[200px] object-contain bg-[#111] p-1 border border-[#333]" />
+                    <img key={index} src={imgUrl.startsWith('http') ? imgUrl : `${import.meta.env.BASE_URL}${imgUrl.replace(/^\//, '')}`} alt={`${exercise.equipment} ${index + 1}`} className="max-w-full h-auto rounded-lg shadow-md max-h-[200px] object-contain bg-[#111] p-1 border border-[#333]" />
                   ))}
                   {(!exercise.images || exercise.images.length === 0) && (
                      <div className="text-zinc-500 text-xs text-center py-8">Imagens indisponíveis</div>
