@@ -109,8 +109,17 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
               >
                 {/* Entry Header Accordion Button */}
                 <div
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleExpand(entry.id);
+                    }
+                  }}
                   onClick={() => toggleExpand(entry.id)}
-                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-[#111] transition-all select-none"
+                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-[#111] transition-all select-none focus-visible:outline-none focus-visible:bg-[#111] focus-visible:ring-2 focus-visible:ring-[#444] rounded-xl"
                 >
                   <div className="flex items-center gap-3">
                     {/* Circle badge denoting series */}

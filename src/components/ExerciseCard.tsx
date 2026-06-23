@@ -45,7 +45,16 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
     >
       {/* Top Banner Section */}
       <div
-        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors"
+        role="button"
+        tabIndex={0}
+        aria-expanded={showGuide}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setShowGuide(!showGuide);
+          }
+        }}
+        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors focus-visible:outline-none focus-visible:bg-[#111] focus-visible:ring-2 focus-visible:ring-[#444] rounded-t-xl"
         onClick={() => setShowGuide(!showGuide)}
       >
         <div className="flex-1">
