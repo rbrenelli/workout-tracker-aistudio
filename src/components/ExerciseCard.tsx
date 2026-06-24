@@ -45,8 +45,17 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
     >
       {/* Top Banner Section */}
       <div
-        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors"
+        role="button"
+        tabIndex={0}
+        aria-expanded={showGuide}
+        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] outline-none transition-colors"
         onClick={() => setShowGuide(!showGuide)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setShowGuide(!showGuide);
+          }
+        }}
       >
         <div className="flex-1">
           {/* Muscle Category Pin */}
@@ -179,7 +188,8 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                 value={session.weight}
                 onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
                 placeholder={previousCarga || "0"}
-                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-colors"
+                aria-label={`Carga para ${exercise.name}`}
+                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] focus-visible:ring-2 focus-visible:ring-zinc-500 rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-colors"
               />
               <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
             </div>
