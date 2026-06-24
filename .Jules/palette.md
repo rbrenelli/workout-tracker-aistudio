@@ -1,0 +1,3 @@
+## 2024-06-24 - Missing Keyboard Semantics for Interactive Divs
+**Learning:** In this project, heavily custom-styled interactive components like accordions (`ExerciseCard` banner) often use `div`s with `onClick` handlers but initially lacked proper keyboard accessibility semantics, making them invisible to keyboard-only users. Furthermore, icon-only utility buttons and numeric inputs frequently lacked contextual `aria-label`s.
+**Action:** Always verify that interactive custom components have `role="button"`, `tabIndex={0}`, `aria-expanded` (if applicable), explicit `focus-visible` styles, and keyboard event handlers (`onKeyDown` for Space/Enter) to ensure proper keyboard operability. Also ensure inputs and icon-only buttons always have explicit `aria-label`s.
