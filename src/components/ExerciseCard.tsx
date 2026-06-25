@@ -87,13 +87,15 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           </button>
 
           {/* Expand Details Trigger */}
-          <div
+          <button
+            type="button"
             className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333]"
             title="Visualizar instruções e aparelho"
             aria-label="Exibir guia do aparelho"
+            aria-expanded={showGuide}
           >
             {showGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-          </div>
+          </button>
         </div>
       </div>
 
@@ -171,9 +173,10 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
         {/* Input for Weight Carga */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1">Carga</span>
+            <label htmlFor={`weight-${exercise.id}`} className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1 cursor-pointer">Carga</label>
             <div className="relative flex items-center w-28">
               <input
+                id={`weight-${exercise.id}`}
                 type="text"
                 inputMode="decimal"
                 value={session.weight}
