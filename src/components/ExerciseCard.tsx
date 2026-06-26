@@ -171,17 +171,18 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
         {/* Input for Weight Carga */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1">Carga</span>
+            <label htmlFor={`weight-${exercise.id}`} className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest font-black leading-none mb-1">Carga</label>
             <div className="relative flex items-center w-28">
               <input
+                id={`weight-${exercise.id}`}
                 type="text"
                 inputMode="decimal"
                 value={session.weight}
                 onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
                 placeholder={previousCarga || "0"}
-                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-colors"
+                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111] focus-visible:ring-zinc-400 rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-all"
               />
-              <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
+              <span aria-hidden="true" className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
             </div>
           </div>
 
@@ -200,8 +201,9 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           </span>
           <button
             onClick={() => onExerciseChange(exercise.id, 'completed', !session.completed)}
-            aria-label={`Marcar exercício ${exercise.name} como concluído`}
-            className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border ${
+            aria-label={session.completed ? `Desmarcar exercício ${exercise.name}` : `Marcar exercício ${exercise.name} como concluído`}
+            aria-pressed={session.completed}
+            className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111] focus-visible:ring-zinc-400 ${
               session.completed
                 ? 'border-transparent shadow-lg text-black'
                 : 'border-[#333] bg-[#1a1a1a] text-transparent hover:border-[#444] hover:bg-[#222]'
