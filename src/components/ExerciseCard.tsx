@@ -45,8 +45,17 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
     >
       {/* Top Banner Section */}
       <div
-        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors"
+        role="button"
+        tabIndex={0}
+        aria-expanded={showGuide}
+        className="p-4 flex items-start justify-between gap-3 selection:bg-zinc-800 cursor-pointer hover:bg-[#111] transition-colors focus-visible:outline-none focus-visible:bg-[#111] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-zinc-600 rounded-t-xl"
         onClick={() => setShowGuide(!showGuide)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setShowGuide(!showGuide);
+          }
+        }}
       >
         <div className="flex-1">
           {/* Muscle Category Pin */}
@@ -90,7 +99,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <div
             className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333]"
             title="Visualizar instruções e aparelho"
-            aria-label="Exibir guia do aparelho"
+            aria-hidden="true"
           >
             {showGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </div>
@@ -179,7 +188,8 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                 value={session.weight}
                 onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
                 placeholder={previousCarga || "0"}
-                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-colors"
+                aria-label={`Carga para ${exercise.name} em kg`}
+                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-[#444] rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 transition-colors"
               />
               <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none">kg</span>
             </div>
@@ -200,8 +210,8 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           </span>
           <button
             onClick={() => onExerciseChange(exercise.id, 'completed', !session.completed)}
-            aria-label={`Marcar exercício ${exercise.name} como concluído`}
-            className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border ${
+            aria-label={session.completed ? `Desmarcar exercício ${exercise.name}` : `Marcar exercício ${exercise.name} como concluído`}
+            className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111] focus-visible:ring-zinc-500 ${
               session.completed
                 ? 'border-transparent shadow-lg text-black'
                 : 'border-[#333] bg-[#1a1a1a] text-transparent hover:border-[#444] hover:bg-[#222]'
