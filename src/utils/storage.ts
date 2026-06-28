@@ -8,6 +8,7 @@ import { ExerciseSessionState, WorkoutHistoryEntry } from '../types';
 const KEYS = {
   ACTIVE_A: 'gym_active_session_A',
   ACTIVE_B: 'gym_active_session_B',
+  ACTIVE_C: 'gym_active_session_C',
   HISTORY: 'gym_workout_history',
 };
 
@@ -29,9 +30,9 @@ export const createEmptySession = (exercises: { id: string }[]): ExerciseSession
   return state;
 };
 
-export const loadActiveSession = (routine: 'A' | 'B', defaultExercises: { id: string }[]): ExerciseSessionState => {
+export const loadActiveSession = (routine: 'A' | 'B' | 'C', defaultExercises: { id: string }[]): ExerciseSessionState => {
   try {
-    const key = routine === 'A' ? KEYS.ACTIVE_A : KEYS.ACTIVE_B;
+    const key = routine === 'A' ? KEYS.ACTIVE_A : routine === 'B' ? KEYS.ACTIVE_B : KEYS.ACTIVE_C;
     const raw = localStorage.getItem(key);
     if (raw) {
       const parsed = JSON.parse(raw);
@@ -66,9 +67,9 @@ export const loadActiveSession = (routine: 'A' | 'B', defaultExercises: { id: st
   return createEmptySession(defaultExercises);
 };
 
-export const saveActiveSession = (routine: 'A' | 'B', state: ExerciseSessionState): void => {
+export const saveActiveSession = (routine: 'A' | 'B' | 'C', state: ExerciseSessionState): void => {
   try {
-    const key = routine === 'A' ? KEYS.ACTIVE_A : KEYS.ACTIVE_B;
+    const key = routine === 'A' ? KEYS.ACTIVE_A : routine === 'B' ? KEYS.ACTIVE_B : KEYS.ACTIVE_C;
     localStorage.setItem(key, JSON.stringify(state));
   } catch {
     // Silent fail
@@ -96,27 +97,21 @@ export const saveHistory = (history: WorkoutHistoryEntry[]): void => {
 };
 
 // Export full backup
-export const downloadBackupFile = (): void => {
+export const downloadBackupFile = () => {
   try {
-    const activeA = localStorage.getItem(KEYS.ACTIVE_A) || '{}';
-    const activeB = localStorage.getItem(KEYS.ACTIVE_B) || '{}';
-    const history = localStorage.getItem(KEYS.HISTORY) || '[]';
-
     const backupData = {
       version: 1,
       exportedAt: new Date().toISOString(),
-      activeA: JSON.parse(activeA),
-      activeB: JSON.parse(activeB),
-      history: JSON.parse(history),
+      activeA: JSON.parse(localStorage.getItem(KEYS.ACTIVE_A) || '{}'),
+      activeB: JSON.parse(localStorage.getItem(KEYS.ACTIVE_B) || '{}'),
+      activeC: JSON.parse(localStorage.getItem(KEYS.ACTIVE_C) || '{}'),
+      history: loadHistory(),
     };
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+    const fileBlob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
     const downloadAnchor = document.createElement('a');
-    
-    // Format current date for file name
-    const dateStr = new Date().toISOString().split('T')[0];
-    downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `treino_academia_backup_${dateStr}.json`);
+    downloadAnchor.href = URL.createObjectURL(fileBlob);
+    downloadAnchor.download = `treino_backup_${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -129,6 +124,7 @@ export const downloadBackupFile = (): void => {
 export interface ParsedBackup {
   activeA: ExerciseSessionState;
   activeB: ExerciseSessionState;
+  activeC: ExerciseSessionState;
   history: WorkoutHistoryEntry[];
 }
 
@@ -161,7 +157,7 @@ const isWorkoutHistoryEntry = (val: unknown): val is WorkoutHistoryEntry => {
     'logs' in val &&
     typeof (val as { id: unknown }).id === 'string' &&
     typeof (val as { date: unknown }).date === 'string' &&
-    ((val as { routine: unknown }).routine === 'A' || (val as { routine: unknown }).routine === 'B') &&
+    ((val as { routine: unknown }).routine === 'A' || (val as { routine: unknown }).routine === 'B' || (val as { routine: unknown }).routine === 'C') &&
     typeof (val as { completedExercisesCount: unknown }).completedExercisesCount === 'number' &&
     typeof (val as { totalExercisesCount: unknown }).totalExercisesCount === 'number' &&
     isExerciseSessionState((val as { logs: unknown }).logs)
@@ -177,9 +173,10 @@ export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
 
   const rawActiveA = data.activeA || {};
   const rawActiveB = data.activeB || {};
+  const rawActiveC = data.activeC || {};
   const rawHistory = data.history || [];
 
-  if (!isExerciseSessionState(rawActiveA) || !isExerciseSessionState(rawActiveB)) {
+  if (!isExerciseSessionState(rawActiveA) || !isExerciseSessionState(rawActiveB) || !isExerciseSessionState(rawActiveC)) {
     throw new Error('Dados de treino ativo inválidos.');
   }
 
@@ -210,6 +207,7 @@ export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
   return {
     activeA: sanitizeState(rawActiveA),
     activeB: sanitizeState(rawActiveB),
+    activeC: sanitizeState(rawActiveC),
     history: sanitizeHistory(rawHistory),
   };
 };
@@ -217,5 +215,6 @@ export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
 export const saveBackupToStorage = (backup: ParsedBackup): void => {
   localStorage.setItem(KEYS.ACTIVE_A, JSON.stringify(backup.activeA));
   localStorage.setItem(KEYS.ACTIVE_B, JSON.stringify(backup.activeB));
+  localStorage.setItem(KEYS.ACTIVE_C, JSON.stringify(backup.activeC));
   localStorage.setItem(KEYS.HISTORY, JSON.stringify(backup.history));
 };

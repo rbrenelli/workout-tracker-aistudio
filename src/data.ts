@@ -427,3 +427,157 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     svgType: 'treadmill'
   }
 ];
+
+export const EXERCISES_SERIE_C: Exercise[] = [
+  {
+    id: 'a7',
+    name: 'Puxada Aberta Máquina c/ Anilha',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Dorsais',
+    targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Bíceps Braquial'],
+    equipment: 'Máquina de Puxada Convergente / Barra Pulley',
+    images: ['images/a7_0.jpg', 'images/a7_1.jpg'],
+    instructions: [
+      'Ajuste o apoio de coxas para firmar o quadril.',
+      'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
+      'Inicie o movimento puxando os cotovelos para baixo e para trás.',
+      'Leve a barra ou apoios até a altura do queixo, estufando o peito no final.',
+      'Retorne devagar estendendo totalmente os braços, alongando as costas.'
+    ],
+    tips: 'Foque em puxar com os cotovelos e não com as mãos para isolar melhor as dorsais.',
+    svgType: 'lat_pulldown'
+  },
+  {
+    id: 'a8',
+    name: 'Remada Apoiada PN',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Costas & Bíceps',
+    targetMuscles: ['Mid-Trapezio', 'Rombóides', 'Latíssimo do Dorso', 'Bíceps'],
+    equipment: 'Aparelho de Remada com Apoio de Peito (Mecânica)',
+    images: ['images/a8_0.webp', 'images/a8_1.jpg'],
+    instructions: [
+      'Ajuste a altura do banco para que as mãos fiquem na linha do peito.',
+      'Apoie o esterno firmemente na almofada frontal.',
+      'Segure as manoplas na pegada neutra (palmas voltadas uma para a outra).',
+      'Puxe as manoplas retraindo as escápulas ("fechando as costas") e direcionando cotovelos para trás.',
+      'Retorne alongando a musculatura, resistindo ao peso.'
+    ],
+    tips: 'Mantenha o peito sempre colado no apoio. Não jogue o pescoço para a frente.',
+    svgType: 'chest_supported_row'
+  },
+  {
+    id: 'a9',
+    name: 'Bíceps c/ Barra Reta Livre',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Bíceps',
+    targetMuscles: ['Bíceps Braquial', 'Braquial', 'Braquiorradial'],
+    equipment: 'Barra Reta Livre (Discos/Anilhas)',
+    images: ['images/a9_0.jpg', 'images/a9_1.jpg'],
+    instructions: [
+      'Fique em pé com as pernas na largura do quadril, joelhos relaxados.',
+      'Segure a barra reta com as palmas voltadas para cima (pegada supinada), largura dos ombros.',
+      'Mantenha os cotovelos colados nas laterais do tronco.',
+      'Flexione os braços subindo a barra em direção aos ombros.',
+      'Desça controladamente até o braço quase estender por completo.'
+    ],
+    tips: 'Não balance o tronco para pegar impulso (roubo). Mantenha o corpo perfeitamente ereto.',
+    svgType: 'bicep_curl_bar'
+  },
+  {
+    id: 'a10',
+    name: 'Bíceps Pulley',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Bíceps',
+    targetMuscles: ['Bíceps Braquial', 'Braquiorradial'],
+    equipment: 'Estação de Polia (Cabo Inferior com Barra Reta/W)',
+    images: ['images/a10_0.jpg', 'images/a10_1.png'],
+    instructions: [
+      'Prenda a barra curta no cabo na polia baixa.',
+      'Segure a barra e dê um pequeno passo para trás para tensionar o cabo.',
+      'Cotovelos estabilizados nas costelas.',
+      'Puxe a barra em direção ao peito, apertando o bíceps na parte superior.',
+      'Retorne de forma lenta lutando contra a tração do cabo.'
+    ],
+    tips: 'Cabos mantêm tension em todo o percurso, tire proveito disso descendo o peso bem devagar.',
+    svgType: 'bicep_pulley'
+  },
+  {
+    id: 'b5',
+    name: 'Peitoral Sentado Máquina / Fly',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Peitoral',
+    targetMuscles: ['Pectoralis Major', 'Deltoide Anterior'],
+    equipment: 'Máquina Pec Fly / Voador Peitoral',
+    images: ['images/b5_0.jpg', 'images/b5_1.jpg'],
+    instructions: [
+      'Ajuste o banco para que as manoplas fiquem alinhadas com a altura dos ombros.',
+      'Encoste totalmente as costas e mantenha o abdômen contraído.',
+      'Pegue nos apoios com cotovelos ligeiramente flexionados e travados nessa posição.',
+      'Aproxime os braços à frente do rosto, espremendo o peito no encontro.',
+      'Abra de volta controlando a carga até sentir alongar a musculatura peitoral.'
+    ],
+    tips: 'Não jogue os ombros para frente quando unir as mãos. Mantenha as escápulas aduzidas contra o banco.',
+    svgType: 'pec_fly'
+  },
+  {
+    id: 'b7',
+    name: 'Hammer Inclinado / Desenvolvimento Inclinado Máquina',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Peitoral Superior & Ombros',
+    targetMuscles: ['Porção Clavicular do Peitoral', 'Deltoide Anterior', 'Tríceps'],
+    equipment: 'Máquina de Supino Convergente Inclinado (Hammer)',
+    images: ['images/b7_0.jpg', 'images/b7_1.webp'],
+    instructions: [
+      'Ajuste o banco de forma que as pegadas estejam no nível superior do peitoral.',
+      'Mantenha as escápulas juntas e empurre as manoplas para cima e para frente acompanhando o arco.',
+      'Mantenha o cotovelo sempre posicionado abaixo do nível do punho durante toda a subida.',
+      'Retorne de forma contínua até sentir o alongamento do peito superior.'
+    ],
+    tips: 'A inclinação foca no início do peito e deltóides, ideal para modelar e empunhar força nos ombros.',
+    svgType: 'incline_hammer_press'
+  },
+  {
+    id: 'b8',
+    name: 'Elevação Lateral / Abdução de Ombros com Halter',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Ombros',
+    targetMuscles: ['Deltoide Lateral', 'Deltoide Anterior'],
+    equipment: 'Par de Halteres Médios',
+    images: ['images/b8_0.jpg', 'images/b8_1.jpg'],
+    instructions: [
+      'Fique em pé com a espinha reta e halteres ao lado do quadril.',
+      'Mantenha joelhos levemente destravados e incline o tronco 5° para a frente.',
+      'Eleve os braços lateralmente in arco até a altura dos ombros.',
+      'Os cotovelos devem liderar a subida e ficar sutilmente flexionados.',
+      'Desça os halteres lentamente controlando a gravidade.'
+    ],
+    tips: 'Pense em "jogar os halteres para longe, em direção às paredes", e não simplesmente para cima.',
+    svgType: 'lateral_raise'
+  },
+  {
+    id: 'b10',
+    name: 'Pullover no Pulley',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Dorsais & Peito',
+    targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Pectoralis Minor', 'Tríceps'],
+    equipment: 'Estação Pulley com Barra Reta ou Corda Longa, Polia Alta',
+    images: ['images/b10_0.jpg', 'images/b10_1.jpg'],
+    instructions: [
+      'Segure a barra com pegada pronada com as mãos na largura dos ombros.',
+      'Dê dois passos para trás e incline levemente o quadril para trás, mantendo joelhos semi-flexionados.',
+      'Mantenha os braços quase totalmente estendidos (cotovelos sutilmente confortáveis).',
+      'Puxe a barra em direção às coxas em um arco circular descendente amplo.',
+      'Esprema a lateral das costas no final do arco e retorne devagar alongando o peito e lats.'
+    ],
+    tips: 'Mantenha os ombros longe das orelhas (deprimidos) e ative as dorsais ao longo de todo o arco.',
+    svgType: 'cable_pullover'
+  }
+];

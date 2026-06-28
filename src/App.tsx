@@ -24,7 +24,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { EXERCISES_SERIE_A, EXERCISES_SERIE_B } from './data';
+import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from './data';
 import { Exercise, WorkoutHistoryEntry, ExerciseSessionState, RoutineType } from './types';
 import { ExerciseCard } from './components/ExerciseCard';
 import { WorkoutHistoryView } from './components/WorkoutHistoryView';
@@ -42,6 +42,7 @@ import {
 
 const ACCENT_A = '#ccff00'; // High Density Acid Green
 const ACCENT_B = '#00e5ff'; // High Density Electric Cyan
+const ACCENT_C = '#d946ef'; // High Density Electric Magenta
 
 export default function App() {
   // Navigation & Routine Selection
@@ -50,11 +51,12 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Loaded database references
-  const exercises = activeRoutine === 'A' ? EXERCISES_SERIE_A : EXERCISES_SERIE_B;
+  const exercises = activeRoutine === 'A' ? EXERCISES_SERIE_A : activeRoutine === 'B' ? EXERCISES_SERIE_B : EXERCISES_SERIE_C;
 
   // Workout state loaders
   const [sessionA, setSessionA] = useState<ExerciseSessionState>({});
   const [sessionB, setSessionB] = useState<ExerciseSessionState>({});
+  const [sessionC, setSessionC] = useState<ExerciseSessionState>({});
   const [history, setHistory] = useState<WorkoutHistoryEntry[]>([]);
   
   // Confetti / Celebration HUD State
@@ -86,6 +88,7 @@ export default function App() {
   useEffect(() => {
     setSessionA(loadActiveSession('A', EXERCISES_SERIE_A));
     setSessionB(loadActiveSession('B', EXERCISES_SERIE_B));
+    setSessionC(loadActiveSession('C', EXERCISES_SERIE_C));
     setHistory(loadHistory());
   }, []);
 
@@ -102,8 +105,14 @@ export default function App() {
     }
   }, [sessionB]);
 
-  const activeSession = activeRoutine === 'A' ? sessionA : sessionB;
-  const activeAccentColor = activeRoutine === 'A' ? ACCENT_A : ACCENT_B;
+  useEffect(() => {
+    if (Object.keys(sessionC).length > 0) {
+      saveActiveSession('C', sessionC);
+    }
+  }, [sessionC]);
+
+  const activeSession = activeRoutine === 'A' ? sessionA : activeRoutine === 'B' ? sessionB : sessionC;
+  const activeAccentColor = activeRoutine === 'A' ? ACCENT_A : activeRoutine === 'B' ? ACCENT_B : ACCENT_C;
 
   // Precompute the most recently logged weight (carga) for all exercises in history
   const previousCargas = useMemo(() => {
@@ -150,8 +159,10 @@ export default function App() {
 
     if (activeRoutine === 'A') {
       setSessionA(prev => updateSessionState(prev));
-    } else {
+    } else if (activeRoutine === 'B') {
       setSessionB(prev => updateSessionState(prev));
+    } else {
+      setSessionC(prev => updateSessionState(prev));
     }
   };
 
@@ -208,7 +219,11 @@ export default function App() {
       variant: 'danger',
       onConfirm: () => {
         const empty: ExerciseSessionState = {};
-        const targetExercises = activeRoutine === 'A' ? EXERCISES_SERIE_A : EXERCISES_SERIE_B;
+        const targetExercises = activeRoutine === 'A' 
+          ? EXERCISES_SERIE_A 
+          : activeRoutine === 'B' 
+            ? EXERCISES_SERIE_B 
+            : EXERCISES_SERIE_C;
         
         targetExercises.forEach((ex) => {
           empty[ex.id] = {
@@ -220,8 +235,10 @@ export default function App() {
 
         if (activeRoutine === 'A') {
           setSessionA(empty);
-        } else {
+        } else if (activeRoutine === 'B') {
           setSessionB(empty);
+        } else {
+          setSessionC(empty);
         }
         setDialog(null);
       }
@@ -321,8 +338,10 @@ export default function App() {
 
     if (activeRoutine === 'A') {
       setSessionA(cleanedSession);
-    } else {
+    } else if (activeRoutine === 'B') {
       setSessionB(cleanedSession);
+    } else {
+      setSessionC(cleanedSession);
     }
   };
 
@@ -364,6 +383,7 @@ export default function App() {
         // Refresh States
         setSessionA(backup.activeA);
         setSessionB(backup.activeB);
+        setSessionC(backup.activeC || {});
         setHistory(backup.history);
 
         setDialog({
@@ -454,7 +474,7 @@ export default function App() {
               </div>
               <div>
                 <h1 className="text-base font-display font-black text-white tracking-wider flex items-center gap-1 uppercase">
-                  CORE FIT <span className="text-[11px] bg-[#1a1a1a] text-gym-accent-a font-mono font-medium tracking-normal px-1.5 py-0.2 rounded border border-[#333]">PRO</span>
+                  Treino
                 </h1>
                 <p className="text-[12px] font-sans text-zinc-400 font-bold uppercase tracking-wider">GUIA E PAINEL DE TREINO</p>
               </div>
@@ -523,14 +543,14 @@ export default function App() {
                   <span className="text-[13px] font-mono text-zinc-500 font-medium tracking-tight">Período Ativo</span>
                 </div>
                 
-                {/* Clean Toggle Switch between A & B */}
-                <div className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-44">
+                {/* Clean Toggle Switch between A, B & C */}
+                <div className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-60">
                   <button
                     onClick={() => {
                       setActiveRoutine('A');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-xs font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
                     style={{
                       backgroundColor: activeRoutine === 'A' ? ACCENT_A : 'transparent',
                       color: activeRoutine === 'A' ? '#000000' : '#71717a'
@@ -544,13 +564,27 @@ export default function App() {
                       setActiveRoutine('B');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-xs font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
                     style={{
                       backgroundColor: activeRoutine === 'B' ? ACCENT_B : 'transparent',
                       color: activeRoutine === 'B' ? '#000000' : '#71717a'
                     }}
                   >
                     SÉRIE B
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveRoutine('C');
+                      setSearchQuery('');
+                    }}
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    style={{
+                      backgroundColor: activeRoutine === 'C' ? ACCENT_C : 'transparent',
+                      color: activeRoutine === 'C' ? '#000000' : '#71717a'
+                    }}
+                  >
+                    SÉRIE C
                   </button>
                 </div>
               </div>
@@ -565,7 +599,9 @@ export default function App() {
                   <h2 className="text-sm font-display font-bold text-white tracking-tight uppercase">
                     {activeRoutine === 'A' 
                       ? 'Série A: Posterior, Coxas e Puxada (Costas)' 
-                      : 'Série B: Anterior, Pernas e Empurrar (Peito/Ombro)'
+                      : activeRoutine === 'B'
+                        ? 'Série B: Anterior, Pernas e Empurrar (Peito/Ombro)'
+                        : 'Série C: Treino Personalizado (Puxada, Peito & Braços)'
                     }
                   </h2>
                 </div>

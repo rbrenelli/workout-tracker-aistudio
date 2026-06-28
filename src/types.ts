@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type RoutineType = 'A' | 'B';
+export type RoutineType = 'A' | 'B' | 'C';
 
 export interface Exercise {
   id: string;
