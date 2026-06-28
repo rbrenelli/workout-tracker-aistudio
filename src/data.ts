@@ -14,7 +14,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Quadríceps',
     targetMuscles: ['Reto Femoral', 'Vasto Lateral', 'Vasto Medial'],
     equipment: 'Aparelho Extensor de Pernas (Polia)',
-    images: ['images/a1_0.png', 'images/a1_1.jpg', 'images/a1_2.webp'],
+    images: ['images/a1_0.png', 'images/a1_1.jpg'],
     instructions: [
       'Ajuste o encosto de modo que a dobra dos joelhos coincida com a borda do assento.',
       'Coloque o rolo almofadado logo acima do tornozelo.',
@@ -33,7 +33,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Quadríceps & Glúteos',
     targetMuscles: ['Quadríceps', 'Glúteo Máximo', 'Isquiotibiais'],
     equipment: 'Leg Press Angulado 45 Graus',
-    images: ['images/a2_0.webp', 'images/a2_1.png', 'images/a2_2.jpg'],
+    images: ['images/a2_0.webp', 'images/a2_1.png'],
     instructions: [
       'Sente-se com as costas e cabeça apoiadas firmemente no encosto.',
       'Posicione os pés na largura dos ombros no meio da plataforma.',
@@ -52,7 +52,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Quadríceps & Glúteos',
     targetMuscles: ['Quadríceps', 'Glúteo Máximo', 'Panturrilhas'],
     equipment: 'Leg Press Horizontal (Cabos)',
-    images: ['images/a3_0.jpg', 'images/a3_1.jpg', 'images/a3_2.jpg'],
+    images: ['images/a3_0.jpg', 'images/a3_1.jpg'],
     instructions: [
       'Ajuste a distância do assento para que comece com os joelhos em torno de 90°.',
       'Apoie os pés na plataforma na largura do quadril.',
@@ -71,7 +71,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Adutores',
     targetMuscles: ['Adutor Magno', 'Adutor Longo', 'Grácil'],
     equipment: 'Cadeira Adutora (Polia)',
-    images: ['images/a4_0.webp', 'images/a4_1.webp', 'images/a4_2.jpg'],
+    images: ['images/a4_0.webp', 'images/a4_1.webp'],
     instructions: [
       'Sente-se com a coluna reta e bem encostada.',
       'Ajuste o ângulo de abertura inicial de forma confortável, porém desafiadora.',
@@ -90,7 +90,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Coxas & Glúteos',
     targetMuscles: ['Quadríceps', 'Isquiotibiais', 'Glúteo Máximo', 'Core'],
     equipment: 'Peso Corporal ou Barra Livre',
-    images: ['images/a5_0.jpg', 'images/a5_1.jpg', 'images/a5_2.jpg'],
+    images: ['images/a5_0.jpg', 'images/a5_1.jpg'],
     instructions: [
       'Fique em pé com os pés ligeiramente mais largos que os ombros, virados para fora (15°).',
       'Inicie o movimento projetando o quadril para trás, como se fosse sentar em uma cadeira.',
@@ -109,7 +109,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Posterior & Lombar',
     targetMuscles: ['Isquiotibiais (Posteriores)', 'Glúteo Máximo', 'Eretores da Espinha'],
     equipment: 'Par de Halteres',
-    images: ['images/a6_0.webp', 'images/a6_1.webp', 'images/a6_2.jpg'],
+    images: ['images/a6_0.webp', 'images/a6_1.webp'],
     instructions: [
       'Segure um halter em cada mão à frente das coxas com as palmas voltadas para trás.',
       'Mantenha os pés na largura do quadril e joelhos levemente destravados (semi-flexionados).',
@@ -128,7 +128,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Dorsais',
     targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Bíceps Braquial'],
     equipment: 'Máquina de Puxada Convergente / Barra Pulley',
-    images: ['images/a7_0.jpg', 'images/a7_1.jpg', 'images/a7_2.jpg'],
+    images: ['images/a7_0.jpg', 'images/a7_1.jpg'],
     instructions: [
       'Ajuste o apoio de coxas para firmar o quadril.',
       'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
@@ -147,7 +147,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Costas & Bíceps',
     targetMuscles: ['Mid-Trapezio', 'Rombóides', 'Latíssimo do Dorso', 'Bíceps'],
     equipment: 'Aparelho de Remada com Apoio de Peito (Mecânica)',
-    images: ['images/a8_0.webp', 'images/a8_1.jpg', 'images/a8_2.jpg'],
+    images: ['images/a8_0.webp', 'images/a8_1.jpg'],
     instructions: [
       'Ajuste a altura do banco para que as mãos fiquem na linha do peito.',
       'Apoie o esterno firmemente na almofada frontal.',
@@ -166,7 +166,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Bíceps',
     targetMuscles: ['Bíceps Braquial', 'Braquial', 'Braquiorradial'],
     equipment: 'Barra Reta Livre (Discos/Anilhas)',
-    images: ['images/a9_0.jpg', 'images/a9_1.jpg', 'images/a9_2.png'],
+    images: ['images/a9_0.jpg', 'images/a9_1.jpg'],
     instructions: [
       'Fique em pé com as pernas na largura do quadril, joelhos relaxados.',
       'Segure a barra reta com as palmas voltadas para cima (pegada supinada), largura dos ombros.',
@@ -185,7 +185,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Bíceps',
     targetMuscles: ['Bíceps Braquial', 'Braquiorradial'],
     equipment: 'Estação de Polia (Cabo Inferior com Barra Reta/W)',
-    images: ['images/a10_0.jpg', 'images/a10_1.png', 'images/a10_2.jpg'],
+    images: ['images/a10_0.jpg', 'images/a10_1.png'],
     instructions: [
       'Prenda a barra curta no cabo na polia baixa.',
       'Segure a barra e dê um pequeno passo para trás para tensionar o cabo.',
@@ -204,7 +204,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Cardiovascular',
     targetMuscles: ['Sistema Cardiovascular', 'Quadríceps', 'Panturrilhas'],
     equipment: 'Esteira Ergométrica',
-    images: ['images/a11_0.jpg', 'images/a11_1.jpg', 'images/a11_2.webp'],
+    images: ['images/a11_0.jpg', 'images/a11_1.jpg'],
     instructions: [
       'Inicie com um aquecimento lento por 3 a 5 minutos.',
       'Aumente a velocidade ou inclinação para um nível moderado (zona de queima de gordura/aeróbica).',
@@ -226,7 +226,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Posterior',
     targetMuscles: ['Bíceps Femoral', 'Semitendíneo', 'Semimembranáceo'],
     equipment: 'Mesa/Cadeira Flexora Acoplada (Polia)',
-    images: ['images/b1_0.jpg', 'images/b1_1.jpg', 'images/b1_2.jpg'],
+    images: ['images/b1_0.jpg', 'images/b1_1.jpg'],
     instructions: [
       'Sente-se posicionando a parte de trás do joelho colada na dobra do banco.',
       'Ajuste o apoio almofadado acima do tendão de Aquiles.',
@@ -245,7 +245,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Glúteos / Quadris',
     targetMuscles: ['Glúteo Médio', 'Glúteo Mínimo', 'Tensor da Fáscia Lata'],
     equipment: 'Cadeira Abdutora (Polia)',
-    images: ['images/b2_0.webp', 'images/b2_1.jpg', 'images/b2_2.webp'],
+    images: ['images/b2_0.webp', 'images/b2_1.jpg'],
     instructions: [
       'Sente-se mantendo o tronco erguido ou ligeiramente inclinado à frente para isolar os glúteos.',
       'Posicione as almofadas na parte lateral externa dos joelhos.',
@@ -264,7 +264,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Coxas & Glúteos',
     targetMuscles: ['Adutores (Interno de Coxa)', 'Glúteo Máximo', 'Quadríceps'],
     equipment: 'Halter Pesado ou Kettlebell',
-    images: ['images/b3_0.jpg', 'images/b3_1.jpg', 'images/b3_2.jpg'],
+    images: ['images/b3_0.jpg', 'images/b3_1.jpg'],
     instructions: [
       'Fique de pé com um afastamento bem largo das pernas (posição de sumô).',
       'Aponte as pontas dos pés para fora em um ângulo confortável (~45°).',
@@ -283,7 +283,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Panturrilhas',
     targetMuscles: ['Gastrocnêmio Lateral', 'Gastrocnêmio Medial', 'Sóleu'],
     equipment: 'Degrau, Gaiola de Panturrilha ou Máquina em Pé',
-    images: ['images/b4_0.jpg', 'images/b4_1.jpg', 'images/b4_2.jpg'],
+    images: ['images/b4_0.jpg', 'images/b4_1.jpg'],
     instructions: [
       'Apoie apenas a ponta dos pés na borda de um degrau ou plataforma.',
       'Se posicione ereto. Use o corrimão para equilíbrio se for livre.',
@@ -302,7 +302,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Peitoral',
     targetMuscles: ['Pectoralis Major', 'Deltoide Anterior'],
     equipment: 'Máquina Pec Fly / Voador Peitoral',
-    images: ['images/b5_0.jpg', 'images/b5_1.jpg', 'images/b5_2.png'],
+    images: ['images/b5_0.jpg', 'images/b5_1.jpg'],
     instructions: [
       'Ajuste o banco para que as manoplas fiquem alinhadas com a altura dos ombros.',
       'Encoste totalmente as costas e mantenha o abdômen contraído.',
@@ -321,7 +321,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Peitoral & Tríceps',
     targetMuscles: ['Pectoralis Major', 'Tríceps Braquial', 'Deltoide Anterior'],
     equipment: 'Máquina de Supino Horizontal Articulada',
-    images: ['images/b6_0.jpg', 'images/b6_1.png', 'images/b6_2.png'],
+    images: ['images/b6_0.jpg', 'images/b6_1.png'],
     instructions: [
       'Sente-se com as costas bem firmadas e os pés apoiados no chão.',
       'Ajuste o assento para que as manoplas coincidam com a linha média do peito.',
@@ -340,7 +340,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Peitoral Superior & Ombros',
     targetMuscles: ['Porção Clavicular do Peitoral', 'Deltoide Anterior', 'Tríceps'],
     equipment: 'Máquina de Supino Convergente Inclinado (Hammer)',
-    images: ['images/b7_0.jpg', 'images/b7_1.webp', 'images/b7_2.webp'],
+    images: ['images/b7_0.jpg', 'images/b7_1.webp'],
     instructions: [
       'Ajuste o banco de forma que as pegadas estejam no nível superior do peitoral.',
       'Mantenha as escápulas juntas e empurre as manoplas para cima e para frente acompanhando o arco.',
@@ -358,7 +358,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Ombros',
     targetMuscles: ['Deltoide Lateral', 'Deltoide Anterior'],
     equipment: 'Par de Halteres Médios',
-    images: ['images/b8_0.jpg', 'images/b8_1.jpg', 'images/b8_2.webp'],
+    images: ['images/b8_0.jpg', 'images/b8_1.jpg'],
     instructions: [
       'Fique em pé com a espinha reta e halteres ao lado do quadril.',
       'Mantenha joelhos levemente destravados e incline o tronco 5° para a frente.',
@@ -377,7 +377,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Tríceps',
     targetMuscles: ['Tríceps Braquial (Cabeça Lateral)', 'Tríceps (Cabeça Medial)'],
     equipment: 'Estação Pulley (Cabo Superior com Barra Reta/V)',
-    images: ['images/b9_0.jpg', 'images/b9_1.jpg', 'images/b9_2.jpg'],
+    images: ['images/b9_0.jpg', 'images/b9_1.jpg'],
     instructions: [
       'Ajuste a polia alta e segure a barra reta com pegada pronada (palmas para baixo).',
       'Aproxime os cotovelos das costelas e trave-os ali firmemente.',
@@ -396,7 +396,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Dorsais & Peito',
     targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Pectoralis Minor', 'Tríceps'],
     equipment: 'Estação Pulley com Barra Reta ou Corda Longa, Polia Alta',
-    images: ['images/b10_0.jpg', 'images/b10_1.jpg', 'images/b10_2.jpg'],
+    images: ['images/b10_0.jpg', 'images/b10_1.jpg'],
     instructions: [
       'Segure a barra com pegada pronada com as mãos na largura dos ombros.',
       'Dê dois passos para trás e incline levemente o quadril para trás, mantendo joelhos semi-flexionados.',
@@ -415,7 +415,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Cardiovascular',
     targetMuscles: ['Sistema Cardiovascular', 'Quadríceps', 'Panturrilhas'],
     equipment: 'Esteira Ergométrica',
-    images: ['images/b11_0.jpg', 'images/b11_1.webp', 'images/b11_2.jpg'],
+    images: ['images/b11_0.jpg', 'images/b11_1.webp'],
     instructions: [
       'Inicie com um aquecimento lento por 3 a 5 minutos.',
       'Aumente a velocidade ou inclinação para um nível moderado (zona de queima de gordura/aeróbica).',

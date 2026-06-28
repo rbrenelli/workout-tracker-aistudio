@@ -23,6 +23,7 @@ export const createEmptySession = (exercises: { id: string }[]): ExerciseSession
     state[ex.id] = {
       weight: '', // Empty initially
       completed: false,
+      completedSets: 0,
     };
   });
   return state;
@@ -46,9 +47,14 @@ export const loadActiveSession = (routine: 'A' | 'B', defaultExercises: { id: st
           migrated[key] = {
             weight: firstSetWithWeight && firstSetWithWeight.weight !== undefined ? String(firstSetWithWeight.weight) : '',
             completed: !!firstCompletedSet,
+            completedSets: firstCompletedSet ? 1 : 0,
           };
         } else if (value && typeof value === 'object') {
-          migrated[key] = value;
+          migrated[key] = {
+            weight: (value as any).weight || '',
+            completed: !!(value as any).completed,
+            completedSets: typeof (value as any).completedSets === 'number' ? (value as any).completedSets : ((value as any).completed ? 3 : 0),
+          };
         }
       });
       const initial = createEmptySession(defaultExercises);
@@ -126,14 +132,15 @@ export interface ParsedBackup {
   history: WorkoutHistoryEntry[];
 }
 
-const isExerciseSession = (val: unknown): val is { weight: string; completed: boolean } => {
+const isExerciseSession = (val: unknown): val is { weight: string; completed: boolean; completedSets?: number } => {
   return (
     val !== null &&
     typeof val === 'object' &&
     'weight' in val &&
     'completed' in val &&
     typeof (val as { weight: unknown }).weight === 'string' &&
-    typeof (val as { completed: unknown }).completed === 'boolean'
+    typeof (val as { completed: unknown }).completed === 'boolean' &&
+    (!('completedSets' in val) || typeof (val as { completedSets: unknown }).completedSets === 'number')
   );
 };
 
@@ -168,22 +175,42 @@ export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
     throw new Error('Formato de arquivo inválido.');
   }
 
-  const activeA = data.activeA || {};
-  const activeB = data.activeB || {};
-  const history = data.history || [];
+  const rawActiveA = data.activeA || {};
+  const rawActiveB = data.activeB || {};
+  const rawHistory = data.history || [];
 
-  if (!isExerciseSessionState(activeA) || !isExerciseSessionState(activeB)) {
+  if (!isExerciseSessionState(rawActiveA) || !isExerciseSessionState(rawActiveB)) {
     throw new Error('Dados de treino ativo inválidos.');
   }
 
-  if (!Array.isArray(history) || !history.every(isWorkoutHistoryEntry)) {
+  if (!Array.isArray(rawHistory) || !rawHistory.every(isWorkoutHistoryEntry)) {
     throw new Error('Histórico de treinos inválido.');
   }
 
+  const sanitizeState = (state: ExerciseSessionState): ExerciseSessionState => {
+    const sanitized: ExerciseSessionState = {};
+    Object.keys(state).forEach((key) => {
+      const val = state[key];
+      sanitized[key] = {
+        weight: val.weight,
+        completed: val.completed,
+        completedSets: typeof val.completedSets === 'number' ? val.completedSets : (val.completed ? 3 : 0),
+      };
+    });
+    return sanitized;
+  };
+
+  const sanitizeHistory = (hist: WorkoutHistoryEntry[]): WorkoutHistoryEntry[] => {
+    return hist.map((entry) => ({
+      ...entry,
+      logs: sanitizeState(entry.logs),
+    }));
+  };
+
   return {
-    activeA,
-    activeB,
-    history,
+    activeA: sanitizeState(rawActiveA),
+    activeB: sanitizeState(rawActiveB),
+    history: sanitizeHistory(rawHistory),
   };
 };
 

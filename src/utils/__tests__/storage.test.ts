@@ -37,8 +37,12 @@ describe('storage.ts', () => {
       };
 
       const result = parseAndValidateBackup(JSON.stringify(validBackup));
-      expect(result.activeA).toEqual(validBackup.activeA);
-      expect(result.activeB).toEqual(validBackup.activeB);
+      expect(result.activeA).toEqual({
+        "ex1": { weight: "20", completed: true, completedSets: 3 }
+      });
+      expect(result.activeB).toEqual({
+        "ex2": { weight: "", completed: false, completedSets: 0 }
+      });
       expect(result.history).toHaveLength(1);
       expect(result.history[0].id).toBe("12345");
     });
@@ -106,16 +110,18 @@ describe('storage.ts', () => {
       
       expect(result["ex1"]).toEqual({
         weight: "15", // The first set with a weight
-        completed: true // True if any set is completed
+        completed: true, // True if any set is completed
+        completedSets: 1
       });
       expect(result["ex2"]).toEqual({
         weight: "",
-        completed: false
+        completed: false,
+        completedSets: 0
       });
     });
 
     it('should load standard state format correctly', () => {
-      const standardData: ExerciseSessionState = {
+      const standardData = {
         "ex1": { weight: "25", completed: true },
         "ex2": { weight: "10", completed: false }
       };
@@ -123,7 +129,10 @@ describe('storage.ts', () => {
       localStorage.setItem('gym_active_session_B', JSON.stringify(standardData));
 
       const result = loadActiveSession('B', defaultExercises);
-      expect(result).toEqual(standardData);
+      expect(result).toEqual({
+        "ex1": { weight: "25", completed: true, completedSets: 3 },
+        "ex2": { weight: "10", completed: false, completedSets: 0 }
+      });
     });
   });
 });

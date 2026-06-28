@@ -33,7 +33,8 @@ describe('ExerciseCard Component', () => {
 
   const mockSession = {
     weight: "120",
-    completed: false
+    completed: false,
+    completedSets: 0
   };
 
   it('should render basic exercise info', () => {
@@ -132,6 +133,6 @@ describe('ExerciseCard Component', () => {
     const timerButton = screen.getByRole('button', { name: /iniciar cronômetro de descanso de 60 segundos/i });
     fireEvent.click(timerButton);
 
-    expect(mockOnStartTimer).toHaveBeenCalledWith(60);
+    expect(mockOnStartTimer).toHaveBeenCalledWith(60, 'leg_press');
   });
 });

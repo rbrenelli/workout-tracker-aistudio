@@ -4,20 +4,22 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import { X, Play, Pause, RotateCcw, Plus, Minus, Minimize2, Maximize2, BellDot } from 'lucide-react';
+import { X, Play, Pause, RotateCcw, Plus, Minus, Minimize2, BellDot } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface RestTimerProps {
   duration: number; // in seconds
   isOpen: boolean;
   onClose: () => void;
-  accentColor: string; // Neon highlight color (e.g., #06b6d4)
+  onTimerComplete?: () => void; // Callback when timer finishes
+  accentColor: string; // Neon highlight color
 }
 
 export const RestTimer: React.FC<RestTimerProps> = ({
   duration,
   isOpen,
   onClose,
+  onTimerComplete,
   accentColor,
 }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
@@ -59,12 +61,12 @@ export const RestTimer: React.FC<RestTimerProps> = ({
 
   // Alert with Audio Beep and Vibration when countdown finishes
   const triggerCompletionAlert = () => {
-    // 1. Vibrate device (vibration pattern for gym alerts)
+    // 1. Vibrate device
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate([300, 150, 300, 150, 400]);
     }
 
-    // 2. Play Web Audio API Beep (100% client side and client compliant)
+    // 2. Play Web Audio API Beep
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (AudioContextClass) {
@@ -87,13 +89,17 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           osc.stop(audioCtx.currentTime + start + duration);
         };
 
-        // Play neat 3-beep sequences
         playBeep(880, 0, 0.25);
         playBeep(880, 0.4, 0.25);
         playBeep(1200, 0.8, 0.5);
       }
     } catch {
       // Silent fail
+    }
+
+    // 3. Fire completion callback
+    if (onTimerComplete) {
+      onTimerComplete();
     }
   };
 
@@ -113,7 +119,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
   if (!isOpen) return null;
 
   // Circular calculations
-  const radius = 75;
+  const radius = 85;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (timeLeft / duration) * circumference;
 
@@ -182,14 +188,14 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             className="w-full max-w-sm bg-[#0a0a0a] border border-[#222] rounded-2xl p-6 shadow-3xl text-center relative overflow-hidden"
             style={{
               boxShadow: isFinished 
-                ? `0 0 50px -10px ${accentColor}`
+                ? `0 0 80px -10px ${accentColor}`
                 : `0 20px 40px -15px rgba(0, 0, 0, 0.7)`
             }}
           >
             {/* Visual ambient pulse background when finished */}
             {isFinished && (
               <div 
-                className="absolute inset-0 opacity-10 animate-pulse pointer-events-none"
+                className="absolute inset-0 opacity-5 animate-pulse pointer-events-none"
                 style={{ backgroundColor: accentColor }}
               />
             )}
@@ -214,13 +220,39 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               </button>
             </div>
 
+            {/* Quick Duration Presets */}
+            <div className="flex items-center justify-center gap-2 mb-2 flex-wrap">
+              {[30, 60, 90, 120, 180].map((preset) => (
+                <button
+                  key={preset}
+                  onClick={() => {
+                    setTimeLeft(preset);
+                    setIsActive(true);
+                    if (navigator.vibrate) {
+                      navigator.vibrate([10]);
+                    }
+                  }}
+                  className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all border ${
+                    timeLeft === preset && isActive
+                      ? 'border-transparent text-black font-black'
+                      : 'border-[#222] text-zinc-400 bg-[#111] hover:bg-[#1a1a1a] hover:text-white'
+                  }`}
+                  style={{
+                    backgroundColor: timeLeft === preset && isActive ? accentColor : undefined,
+                  }}
+                >
+                  {preset >= 60 ? `${preset / 60}min` : `${preset}s`}
+                </button>
+              ))}
+            </div>
+
             {/* Rest Circular Display */}
-            <div className="relative w-48 h-48 mx-auto my-6 flex items-center justify-center">
+            <div className="relative w-56 h-56 mx-auto my-6 flex items-center justify-center">
               {/* Back Ring */}
-              <svg className="absolute inset-0 w-full h-full -rotate-90">
+              <svg viewBox="0 0 224 224" className="absolute inset-0 w-full h-full -rotate-90">
                 <circle
-                  cx="96"
-                  cy="96"
+                  cx="112"
+                  cy="112"
                   r={radius}
                   className="stroke-[#222]"
                   strokeWidth="6"
@@ -228,8 +260,8 @@ export const RestTimer: React.FC<RestTimerProps> = ({
                 />
                 {/* Active Progress Ring */}
                 <motion.circle
-                  cx="96"
-                  cy="96"
+                  cx="112"
+                  cy="112"
                   r={radius}
                   style={{ stroke: accentColor }}
                   strokeWidth="6"
@@ -250,21 +282,23 @@ export const RestTimer: React.FC<RestTimerProps> = ({
                     transition={{ repeat: Infinity, duration: 1 }}
                     className="flex flex-col items-center"
                   >
-                    <BellDot className="mb-1" style={{ color: accentColor }} size={32} />
-                    <span className="text-2xl font-display font-bold text-white uppercase tracking-wider">Treinar!</span>
+                    <BellDot className="mb-1.5" style={{ color: accentColor }} size={40} />
+                    <span className="text-3xl font-display font-bold text-white uppercase tracking-wider">Treinar!</span>
                   </motion.div>
                 ) : (
-                  <>
-                    <span className="text-5xl font-mono font-bold text-white tracking-tight leading-none">
-                      {formatTime(timeLeft)}
-                    </span>
-                    <span className="text-xs uppercase font-display font-semibold text-zinc-400 tracking-widest mt-2.5">
-                      segundos restantes
-                    </span>
-                  </>
+                  <span className="text-5xl font-mono font-bold text-white tracking-tight leading-none">
+                    {formatTime(timeLeft)}
+                  </span>
                 )}
               </div>
             </div>
+
+            {/* Label below the circle */}
+            {!isFinished && (
+              <div className="text-xs uppercase font-display font-semibold text-zinc-400 tracking-widest text-center -mt-2 mb-6">
+                segundos restantes
+              </div>
+            )}
 
             {/* Time Adjustment Controls */}
             <div className="flex items-center justify-center gap-4 mb-6">

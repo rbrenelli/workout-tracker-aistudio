@@ -26,7 +26,7 @@ describe('WorkoutHistoryView Component', () => {
       completedExercisesCount: 3,
       totalExercisesCount: 10,
       logs: {
-        "puxada_frente": { weight: "50", completed: true }
+        "puxada_frente": { weight: "50", completed: true, completedSets: 3 }
       }
     }
   ];

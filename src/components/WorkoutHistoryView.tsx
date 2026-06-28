@@ -15,6 +15,7 @@ interface WorkoutHistoryViewProps {
   onClearHistory: () => void;
   accentColorA: string;
   accentColorB: string;
+  onNavigateToTracker?: () => void; // Callback to switch to tracker view
 }
 
 export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
@@ -23,6 +24,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
   onClearHistory,
   accentColorA,
   accentColorB,
+  onNavigateToTracker,
 }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
@@ -91,12 +93,29 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
       </div>
 
       {history.length === 0 ? (
-        <div className="text-center py-10 px-4 bg-[#0a0a0a] border border-[#222] border-dashed rounded-xl">
-          <History className="mx-auto text-zinc-500 mb-3" size={36} aria-hidden="true" />
-          <p className="text-sm font-display font-black text-zinc-400 uppercase tracking-wide">Nenhum treino registrado ainda</p>
-          <p className="text-xs text-zinc-500 font-sans mt-2">
-            Complete seus exercícios e clique no botão de "Finalizar Treino" para salvar o seu progresso diário!
-          </p>
+        <div className="text-center py-12 px-6 bg-[#0a0a0a] border border-[#222] border-dashed rounded-2xl flex flex-col items-center justify-center space-y-4">
+          <motion.div
+            animate={{ rotate: [0, -10, 10, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+            className="w-12 h-12 rounded-full bg-[#111] border border-[#222] flex items-center justify-center text-zinc-450"
+          >
+            <History size={24} aria-hidden="true" />
+          </motion.div>
+          <div className="space-y-1">
+            <h4 className="text-sm font-display font-black text-zinc-200 uppercase tracking-wider">Nenhum treino registrado ainda</h4>
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed max-w-xs mx-auto">
+              Complete seus exercícios e clique no botão de <strong>"Finalizar Treino"</strong> para salvar o seu progresso diário!
+            </p>
+          </div>
+          {onNavigateToTracker && (
+            <button
+              type="button"
+              onClick={onNavigateToTracker}
+              className="px-4 py-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] hover:border-[#444] text-white text-xs font-display font-bold uppercase tracking-wider rounded-xl transition-all"
+            >
+              Começar Treino
+            </button>
+          )}
         </div>
       ) : (
         <div className="space-y-3">

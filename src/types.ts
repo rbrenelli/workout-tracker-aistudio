@@ -21,6 +21,7 @@ export interface Exercise {
 export interface ExerciseSession {
   weight: string;     // Single weight for this entire exercise
   completed: boolean; // Single checkbox per exercise
+  completedSets: number; // Number of completed sets (0-3)
 }
 
 export interface ExerciseSessionState {
