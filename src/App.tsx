@@ -42,7 +42,7 @@ import {
 
 const ACCENT_A = '#ccff00'; // High Density Acid Green
 const ACCENT_B = '#00e5ff'; // High Density Electric Cyan
-const ACCENT_C = '#d946ef'; // High Density Electric Magenta
+const ACCENT_C = '#ff6b00'; // High Density Electric Orange
 
 export default function App() {
   // Navigation & Routine Selection
