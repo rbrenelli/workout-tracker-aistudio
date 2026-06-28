@@ -191,40 +191,31 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
       {/* Simplified, Single Weight Tracking Bar at bottom */}
       <div className="border-t border-[#222] px-4 py-3 bg-[#111] flex items-center justify-between gap-4 flex-wrap xs:flex-nowrap">
         {/* Input for Weight Carga */}
-        <div className="flex items-center gap-3 flex-1 min-w-[140px]">
-          <div className="flex flex-col">
-            <label 
-              htmlFor={`weight-input-${exercise.id}`}
-              className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest font-black leading-none mb-1 cursor-pointer"
-            >
-              Carga
-            </label>
-            <div className="relative flex items-center w-36">
-              <input
-                type="text"
-                id={`weight-input-${exercise.id}`}
-                inputMode="decimal"
-                value={session.weight}
-                onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
-                placeholder={previousCarga || "0"}
-                aria-label={`Carga em quilogramas para ${exercise.name}`}
-                className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-zinc-550 focus:ring-2 focus:ring-zinc-700 rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-all"
-                style={{
-                  borderLeftColor: session.weight ? accentColor : undefined,
-                  borderLeftWidth: session.weight ? '3px' : undefined,
-                }}
-              />
-              <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none" aria-hidden="true">
-                kg
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest font-black leading-none mb-1">Meta Reps</span>
-            <div className="bg-[#1a1a1a] border border-[#222] rounded-lg py-1.5 px-3 font-mono text-[13px] font-bold text-zinc-350 text-center select-none whitespace-nowrap">
-              {exercise.defaultSets}x {exercise.defaultReps}
-            </div>
+        <div className="flex flex-col">
+          <label 
+            htmlFor={`weight-input-${exercise.id}`}
+            className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest font-black leading-none mb-1 cursor-pointer"
+          >
+            Carga
+          </label>
+          <div className="relative flex items-center w-36">
+            <input
+              type="text"
+              id={`weight-input-${exercise.id}`}
+              inputMode="decimal"
+              value={session.weight}
+              onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
+              placeholder={previousCarga || "0"}
+              aria-label={`Carga em quilogramas para ${exercise.name}`}
+              className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-zinc-550 focus:ring-2 focus:ring-zinc-700 rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-all"
+              style={{
+                borderLeftColor: session.weight ? accentColor : undefined,
+                borderLeftWidth: session.weight ? '3px' : undefined,
+              }}
+            />
+            <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none" aria-hidden="true">
+              kg
+            </span>
           </div>
         </div>
 
