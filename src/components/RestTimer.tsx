@@ -59,45 +59,14 @@ export const RestTimer: React.FC<RestTimerProps> = ({
     };
   }, [isActive, timeLeft]);
 
-  // Alert with Audio Beep and Vibration when countdown finishes
+  // Alert with Vibration when countdown finishes
   const triggerCompletionAlert = () => {
     // 1. Vibrate device
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate([300, 150, 300, 150, 400]);
     }
 
-    // 2. Play Web Audio API Beep
-    try {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (AudioContextClass) {
-        const audioCtx = new AudioContextClass();
-        
-        const playBeep = (freq: number, start: number, duration: number) => {
-          const osc = audioCtx.createOscillator();
-          const gainNode = audioCtx.createGain();
-          
-          osc.connect(gainNode);
-          gainNode.connect(audioCtx.destination);
-          
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
-          
-          gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + start);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration - 0.05);
-          
-          osc.start(audioCtx.currentTime + start);
-          osc.stop(audioCtx.currentTime + start + duration);
-        };
-
-        playBeep(880, 0, 0.25);
-        playBeep(880, 0.4, 0.25);
-        playBeep(1200, 0.8, 0.5);
-      }
-    } catch {
-      // Silent fail
-    }
-
-    // 3. Fire completion callback
+    // 2. Fire completion callback
     if (onTimerComplete) {
       onTimerComplete();
     }
