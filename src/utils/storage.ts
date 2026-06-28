@@ -11,6 +11,11 @@ const KEYS = {
   HISTORY: 'gym_workout_history',
 };
 
+interface LegacySet {
+  weight?: string | number;
+  completed?: boolean;
+}
+
 // Initial state helpers
 export const createEmptySession = (exercises: { id: string }[]): ExerciseSessionState => {
   const state: ExerciseSessionState = {};
@@ -35,10 +40,11 @@ export const loadActiveSession = (routine: 'A' | 'B', defaultExercises: { id: st
         const value = parsed[key];
         if (Array.isArray(value)) {
           // It's a legacy SetLog array, convert to simplified ExerciseSession
-          const firstCompletedSet = value.find((s: any) => s.completed);
-          const firstSetWithWeight = value.find((s: any) => s.weight);
+          const legacySets = value as LegacySet[];
+          const firstCompletedSet = legacySets.find((s) => s.completed);
+          const firstSetWithWeight = legacySets.find((s) => s.weight !== undefined && s.weight !== '');
           migrated[key] = {
-            weight: firstSetWithWeight ? firstSetWithWeight.weight : '',
+            weight: firstSetWithWeight && firstSetWithWeight.weight !== undefined ? String(firstSetWithWeight.weight) : '',
             completed: !!firstCompletedSet,
           };
         } else if (value && typeof value === 'object') {
@@ -48,8 +54,8 @@ export const loadActiveSession = (routine: 'A' | 'B', defaultExercises: { id: st
       const initial = createEmptySession(defaultExercises);
       return { ...initial, ...migrated };
     }
-  } catch (e) {
-    console.error('Error loading active session from localStorage', e);
+  } catch {
+    // Silent fail to avoid crashing the application
   }
   return createEmptySession(defaultExercises);
 };
@@ -58,8 +64,8 @@ export const saveActiveSession = (routine: 'A' | 'B', state: ExerciseSessionStat
   try {
     const key = routine === 'A' ? KEYS.ACTIVE_A : KEYS.ACTIVE_B;
     localStorage.setItem(key, JSON.stringify(state));
-  } catch (e) {
-    console.error('Error saving active session to localStorage', e);
+  } catch {
+    // Silent fail
   }
 };
 
@@ -69,8 +75,8 @@ export const loadHistory = (): WorkoutHistoryEntry[] => {
     if (raw) {
       return JSON.parse(raw);
     }
-  } catch (e) {
-    console.error('Error loading workout history from localStorage', e);
+  } catch {
+    // Silent fail
   }
   return [];
 };
@@ -78,8 +84,8 @@ export const loadHistory = (): WorkoutHistoryEntry[] => {
 export const saveHistory = (history: WorkoutHistoryEntry[]): void => {
   try {
     localStorage.setItem(KEYS.HISTORY, JSON.stringify(history));
-  } catch (e) {
-    console.error('Error saving workout history to localStorage', e);
+  } catch {
+    // Silent fail
   }
 };
 
@@ -108,8 +114,7 @@ export const downloadBackupFile = (): void => {
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
-  } catch (e) {
-    console.error('Error preparing backup download:', e);
+  } catch {
     alert('Erro ao exportar backup. Tente novamente.');
   }
 };
@@ -121,6 +126,41 @@ export interface ParsedBackup {
   history: WorkoutHistoryEntry[];
 }
 
+const isExerciseSession = (val: unknown): val is { weight: string; completed: boolean } => {
+  return (
+    val !== null &&
+    typeof val === 'object' &&
+    'weight' in val &&
+    'completed' in val &&
+    typeof (val as { weight: unknown }).weight === 'string' &&
+    typeof (val as { completed: unknown }).completed === 'boolean'
+  );
+};
+
+const isExerciseSessionState = (val: unknown): val is ExerciseSessionState => {
+  if (val === null || typeof val !== 'object' || Array.isArray(val)) return false;
+  return Object.values(val).every(isExerciseSession);
+};
+
+const isWorkoutHistoryEntry = (val: unknown): val is WorkoutHistoryEntry => {
+  return (
+    val !== null &&
+    typeof val === 'object' &&
+    'id' in val &&
+    'date' in val &&
+    'routine' in val &&
+    'completedExercisesCount' in val &&
+    'totalExercisesCount' in val &&
+    'logs' in val &&
+    typeof (val as { id: unknown }).id === 'string' &&
+    typeof (val as { date: unknown }).date === 'string' &&
+    ((val as { routine: unknown }).routine === 'A' || (val as { routine: unknown }).routine === 'B') &&
+    typeof (val as { completedExercisesCount: unknown }).completedExercisesCount === 'number' &&
+    typeof (val as { totalExercisesCount: unknown }).totalExercisesCount === 'number' &&
+    isExerciseSessionState((val as { logs: unknown }).logs)
+  );
+};
+
 export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
   const data = JSON.parse(fileText);
 
@@ -128,10 +168,17 @@ export const parseAndValidateBackup = (fileText: string): ParsedBackup => {
     throw new Error('Formato de arquivo inválido.');
   }
 
-  // Soft validation
   const activeA = data.activeA || {};
   const activeB = data.activeB || {};
-  const history = Array.isArray(data.history) ? data.history : [];
+  const history = data.history || [];
+
+  if (!isExerciseSessionState(activeA) || !isExerciseSessionState(activeB)) {
+    throw new Error('Dados de treino ativo inválidos.');
+  }
+
+  if (!Array.isArray(history) || !history.every(isWorkoutHistoryEntry)) {
+    throw new Error('Histórico de treinos inválido.');
+  }
 
   return {
     activeA,

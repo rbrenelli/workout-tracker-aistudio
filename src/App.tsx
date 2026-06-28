@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   Play, 
   RotateCcw, 
@@ -89,16 +89,38 @@ export default function App() {
   const activeSession = activeRoutine === 'A' ? sessionA : sessionB;
   const activeAccentColor = activeRoutine === 'A' ? ACCENT_A : ACCENT_B;
 
+  // Precompute the most recently logged weight (carga) for all exercises in history
+  const previousCargas = useMemo(() => {
+    const map: Record<string, string> = {};
+    // Traverse history from oldest to newest so that newer entries overwrite older ones
+    history.forEach((entry) => {
+      Object.entries(entry.logs).forEach(([exId, log]) => {
+        if (log && log.weight) {
+          map[exId] = log.weight;
+        }
+      });
+    });
+    return map;
+  }, [history]);
+
   // Handle exercise log change (single weight and single completed status per exercise)
-  const handleExerciseChange = (exerciseId: string, field: 'weight' | 'completed', value: any) => {
+  const handleExerciseChange = (
+    exerciseId: string, 
+    field: 'weight' | 'completed', 
+    value: string | boolean
+  ) => {
     const updateSessionState = (prev: ExerciseSessionState) => {
       const current = prev[exerciseId] || { weight: '', completed: false };
-      const updated = { ...current, [field]: value };
+      const updated = { ...current };
       
-      // If completed toggled to true but weight is blank, autofill previous load!
-      if (field === 'completed' && value === true) {
-        if (!updated.weight) {
-          const lastCarga = findPreviousCarga(exerciseId);
+      if (field === 'weight') {
+        updated.weight = value as string;
+      } else if (field === 'completed') {
+        updated.completed = value as boolean;
+        
+        // If completed toggled to true but weight is blank, autofill previous load!
+        if (value === true && !updated.weight) {
+          const lastCarga = previousCargas[exerciseId];
           if (lastCarga) {
             updated.weight = lastCarga;
           }
@@ -118,19 +140,6 @@ export default function App() {
   const handleStartTimer = (duration: number) => {
     setTimerDuration(duration);
     setTimerOpen(true);
-  };
-
-  // Helper: Find the most recently logged weight (carga) for this exercise in history
-  const findPreviousCarga = (exerciseId: string): string | undefined => {
-    // Traverse history records backwards from most recent
-    for (let i = history.length - 1; i >= 0; i--) {
-      const entry = history[i];
-      const loggedSession = entry.logs[exerciseId];
-      if (loggedSession && loggedSession.weight) {
-        return loggedSession.weight;
-      }
-    }
-    return undefined;
   };
 
   // Calculated session stats based on exercise level completion
@@ -154,11 +163,11 @@ export default function App() {
   // Reset active session
   const handleResetSession = () => {
     if (confirm('Deseja resetar as marcações deste treino ativo? As cargas salvas voltarão ao estado limpo.')) {
-      const empty = {};
+      const empty: ExerciseSessionState = {};
       const targetExercises = activeRoutine === 'A' ? EXERCISES_SERIE_A : EXERCISES_SERIE_B;
       
       targetExercises.forEach((ex) => {
-        (empty as any)[ex.id] = {
+        empty[ex.id] = {
           weight: '',
           completed: false,
         };
@@ -222,7 +231,15 @@ export default function App() {
       "Excelente progresso! Seu corpo agradece.",
       "Superação total! Cargas devidamente registradas."
     ];
-    const randomCongratulations = achievements[Math.floor(Math.random() * achievements.length)];
+    
+    // Cryptographically secure random selection
+    const getRandomIndex = (length: number): number => {
+      const array = new Uint32Array(1);
+      window.crypto.getRandomValues(array);
+      return array[0] % length;
+    };
+    
+    const randomCongratulations = achievements[getRandomIndex(achievements.length)];
     setCelebrationMessage(randomCongratulations);
 
     // Clean completion checkmarks, but preserve the loads so they are populated for convenience next class
@@ -276,7 +293,6 @@ export default function App() {
 
         alert('Backup importado com sucesso! Os seus dados foram totalmente restaurados.');
       } catch (err) {
-        console.error('Error importing backup:', err);
         alert('Erro ao importar backup: Formato de arquivo JSON inválido ou corrompido.');
       }
     };
@@ -451,22 +467,27 @@ export default function App() {
 
             {/* Quick Search and Filter utilities */}
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" aria-hidden="true">
                 <Search size={16} />
               </span>
               <input
                 type="text"
+                id="exercise-search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filtrar por exercício, músculo ou aparelho..."
-                className="w-full bg-[#0a0a0a] border border-[#222] rounded-xl pl-10 pr-4 py-3 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#444] transition-colors"
+                aria-label="Filtrar exercícios por nome, músculo ou aparelho"
+                className="w-full bg-[#0a0a0a] border border-[#222] rounded-xl pl-10 pr-4 py-3 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-700 transition-colors"
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                  aria-label="Limpar busca"
+                  title="Limpar busca"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 rounded-lg p-1"
                 >
-                  <X size={14} />
+                  <X size={14} aria-hidden="true" />
                 </button>
               )}
             </div>
@@ -480,7 +501,7 @@ export default function App() {
               <div className="space-y-4">
                 {filteredExercises.map((ex) => {
                   const sessionState = activeSession[ex.id] || { weight: '', completed: false };
-                  const previousCarga = findPreviousCarga(ex.id);
+                  const previousCarga = previousCargas[ex.id];
 
                   return (
                     <ExerciseCard

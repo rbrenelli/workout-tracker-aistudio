@@ -35,3 +35,10 @@ export interface WorkoutHistoryEntry {
   totalExercisesCount: number;
   logs: ExerciseSessionState;
 }
+
+declare global {
+  interface Window {
+    webkitAudioContext?: typeof AudioContext;
+  }
+}
+

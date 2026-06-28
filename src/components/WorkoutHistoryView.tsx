@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Calendar, Trash2, Award, History, ChevronRight, ChevronDown, Check, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WorkoutHistoryEntry } from '../types';
@@ -31,17 +31,22 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
     setExpandedId(expandedId === id ? null : id);
   };
 
-  // Combine exercises to ease lookup
-  const allExercises = [...EXERCISES_SERIE_A, ...EXERCISES_SERIE_B];
+  // Combine exercises to ease lookup using a Map for O(1) complexity
+  const exercisesMap = useMemo(() => {
+    const map = new Map<string, typeof EXERCISES_SERIE_A[number]>();
+    EXERCISES_SERIE_A.forEach(ex => map.set(ex.id, ex));
+    EXERCISES_SERIE_B.forEach(ex => map.set(ex.id, ex));
+    return map;
+  }, []);
 
   // Helper to find exercise name by ID
   const getExerciseName = (id: string) => {
-    const found = allExercises.find((ex) => ex.id === id);
+    const found = exercisesMap.get(id);
     return found ? found.name : 'Exercício Omitido';
   };
 
   const getExerciseGroup = (id: string) => {
-    const found = allExercises.find((ex) => ex.id === id);
+    const found = exercisesMap.get(id);
     return found ? found.muscleGroup : 'Geral';
   };
 
@@ -51,7 +56,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
       <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-lg bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-500">
-            <Award size={24} />
+            <Award size={24} aria-hidden="true" />
           </div>
           <div>
             <h3 className="text-base font-display font-black text-white uppercase tracking-wider">Histórico de Treino</h3>
@@ -63,6 +68,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
 
         {history.length > 0 && (
           <button
+            type="button"
             onClick={() => {
               if (confirmClear) {
                 onClearHistory();
@@ -72,7 +78,8 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                 setTimeout(() => setConfirmClear(false), 4000); // Disarm after 4s
               }
             }}
-            className={`px-3 py-1.5 rounded text-sm font-semibold font-display transition-all ${
+            aria-label={confirmClear ? "Confirmar reset de todo o histórico" : "Resetar todos os logs de histórico"}
+            className={`px-3 py-1.5 rounded text-sm font-semibold font-display transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
               confirmClear 
                 ? 'bg-red-600 text-white animate-pulse font-bold' 
                 : 'bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] border border-[#333]'
@@ -85,7 +92,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
 
       {history.length === 0 ? (
         <div className="text-center py-10 px-4 bg-[#0a0a0a] border border-[#222] border-dashed rounded-xl">
-          <History className="mx-auto text-zinc-500 mb-3" size={36} />
+          <History className="mx-auto text-zinc-500 mb-3" size={36} aria-hidden="true" />
           <p className="text-sm font-display font-black text-zinc-400 uppercase tracking-wide">Nenhum treino registrado ainda</p>
           <p className="text-xs text-zinc-500 font-sans mt-2">
             Complete seus exercícios e clique no botão de "Finalizar Treino" para salvar o seu progresso diário!
@@ -109,8 +116,18 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
               >
                 {/* Entry Header Accordion Button */}
                 <div
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  aria-label={`${entry.routine === 'A' ? 'Série A' : 'Série B'}, ${entry.date}. ${isExpanded ? 'Recolher detalhes' : 'Expandir detalhes'}`}
                   onClick={() => toggleExpand(entry.id)}
-                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-[#111] transition-all select-none"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleExpand(entry.id);
+                    }
+                  }}
+                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-[#111] transition-all select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-700 rounded-t-xl"
                 >
                   <div className="flex items-center gap-3">
                     {/* Circle badge denoting series */}
@@ -126,21 +143,21 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                         {routineLabel}
                       </h4>
                       <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 font-sans mt-0.5">
-                        <Calendar size={11} className="text-zinc-500" />
+                        <Calendar size={11} className="text-zinc-500" aria-hidden="true" />
                         <span>{entry.date}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {/* Completion indicator */}
+                    {/* Circle badge denoting series */}
                     <span className="text-[11.5px] font-mono font-bold text-zinc-400 bg-[#111] px-2 py-0.5 rounded border border-[#222]">
                       {entry.completedExercisesCount}/{entry.totalExercisesCount} aparelhos
                     </span>
                     
                     {/* Expand indicator icon */}
                     <div className="text-zinc-500 font-sans">
-                      {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                      {isExpanded ? <ChevronDown size={14} aria-hidden="true" /> : <ChevronRight size={14} aria-hidden="true" />}
                     </div>
                   </div>
                 </div>
@@ -166,7 +183,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                             const session = sessionData as { weight: string; completed: boolean };
                             if (!session.completed && !session.weight) return null;
 
-                            const metaExercise = allExercises.find(ex => ex.id === exId);
+                            const metaExercise = exercisesMap.get(exId);
 
                             return (
                               <div key={exId} className="bg-[#0a0a0a] rounded-lg p-2.5 border border-[#222] flex items-center justify-between gap-4">
@@ -204,10 +221,12 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                         {/* Delete entry action */}
                         <div className="flex justify-end pt-1">
                           <button
+                            type="button"
                             onClick={() => onDeleteEntry(entry.id)}
-                            className="bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-display font-medium transition-colors flex items-center gap-1.5"
+                            aria-label={`Remover registro de treino de ${entry.date}`}
+                            className="bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-display font-medium transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
                           >
-                            <Trash2 size={12} />
+                            <Trash2 size={12} aria-hidden="true" />
                             <span>Remover Registro</span>
                           </button>
                         </div>

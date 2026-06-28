@@ -66,31 +66,34 @@ export const RestTimer: React.FC<RestTimerProps> = ({
 
     // 2. Play Web Audio API Beep (100% client side and client compliant)
     try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      
-      const playBeep = (freq: number, start: number, duration: number) => {
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        const audioCtx = new AudioContextClass();
         
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
-        
-        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + start);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration - 0.05);
-        
-        osc.start(audioCtx.currentTime + start);
-        osc.stop(audioCtx.currentTime + start + duration);
-      };
+        const playBeep = (freq: number, start: number, duration: number) => {
+          const osc = audioCtx.createOscillator();
+          const gainNode = audioCtx.createGain();
+          
+          osc.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
+          
+          gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + start);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration - 0.05);
+          
+          osc.start(audioCtx.currentTime + start);
+          osc.stop(audioCtx.currentTime + start + duration);
+        };
 
-      // Play neat 3-beep sequences
-      playBeep(880, 0, 0.25);
-      playBeep(880, 0.4, 0.25);
-      playBeep(1200, 0.8, 0.5);
-    } catch (e) {
-      console.warn("AudioContext not supported or blocked by user gesture:", e);
+        // Play neat 3-beep sequences
+        playBeep(880, 0, 0.25);
+        playBeep(880, 0.4, 0.25);
+        playBeep(1200, 0.8, 0.5);
+      }
+    } catch {
+      // Silent fail
     }
   };
 
@@ -279,7 +282,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               </div>
               <button
                 onClick={() => adjustTime(10)}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-300 hover:bg-[#111] hover:text-white transition-all"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
                 title="Adicionar 10 segundos"
                 aria-label="Adicionar 10 segundos"
               >
