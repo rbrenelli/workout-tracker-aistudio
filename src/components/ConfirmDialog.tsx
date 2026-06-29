@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AlertTriangle, CheckCircle, Info } from 'lucide-react';
 
@@ -28,6 +28,22 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onCancel();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onCancel]);
+
   const getIcon = () => {
     switch (variant) {
       case 'danger':
@@ -72,16 +88,20 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', duration: 0.4 }}
             className="relative w-full max-w-sm bg-[#0a0a0a] border border-[#222] rounded-2xl p-6 shadow-3xl space-y-4 text-center z-10"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-message"
           >
             <div className="mx-auto w-12 h-12 rounded-full bg-[#111] border border-[#222] flex items-center justify-center">
               {getIcon()}
             </div>
 
             <div className="space-y-1.5">
-              <h3 className="text-lg font-display font-black tracking-tight text-white uppercase">
+              <h3 id="dialog-title" className="text-lg font-display font-black tracking-tight text-white uppercase">
                 {title}
               </h3>
-              <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+              <p id="dialog-message" className="text-xs text-zinc-400 font-sans leading-relaxed">
                 {message}
               </p>
             </div>
