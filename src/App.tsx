@@ -679,8 +679,9 @@ export default function App() {
                     <button
                       key={group}
                       type="button"
+                      aria-pressed={isActive}
                       onClick={() => setSearchQuery(isActive ? '' : group)}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 ${
+                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                         isActive
                           ? 'text-black font-bold border-transparent'
                           : 'text-zinc-400 border-[#222] bg-[#0a0a0a] hover:border-zinc-500 hover:text-white'
@@ -698,8 +699,15 @@ export default function App() {
 
             {/* Interactive Exercise Cards */}
             {filteredExercises.length === 0 ? (
-              <div className="text-center py-8 px-4 bg-[#0a0a0a] border border-zinc-900 border-dashed rounded-xl">
-                <p className="text-xs text-zinc-400 font-sans">Nenhum exercício corresponde ao seu filtro.</p>
+              <div className="text-center py-8 px-4 bg-[#0a0a0a] border border-[#222] border-dashed rounded-xl flex flex-col items-center justify-center space-y-4">
+                <p className="text-sm text-zinc-400 font-sans">Nenhum exercício corresponde ao seu filtro.</p>
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="px-4 py-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] hover:border-[#444] text-white text-xs font-display font-bold uppercase tracking-wider rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+                >
+                  Limpar Busca
+                </button>
               </div>
             ) : (
               <div className="space-y-4">
