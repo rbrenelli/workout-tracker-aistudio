@@ -1,0 +1,3 @@
+## 2024-07-03 - [Accessibility] Framer Motion Modals Keyboard Navigation and ARIA Mapping
+**Learning:** Custom animated modals built with Framer Motion's `motion.div` do not inherit native `<dialog>` element behaviors. They lack built-in keyboard accessibility (like closing on Escape) and screen reader support out of the box.
+**Action:** When creating modals with `motion.div`, always explicitly add an event listener for the Escape key to close the modal, and manually apply ARIA mapping attributes (`role="alertdialog"`, `aria-modal="true"`, `aria-labelledby`, `aria-describedby`) to ensure screen readers correctly interpret the modal and its content.
