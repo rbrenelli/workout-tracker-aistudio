@@ -481,9 +481,10 @@ export default function App() {
             </div>
 
             {/* View navigation Tabs */}
-            <div className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
+            <nav aria-label="Navegação de visualização" className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
               <button
                 onClick={() => setCurrentView('tracker')}
+                aria-current={currentView === 'tracker' ? 'page' : undefined}
                 className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
                   currentView === 'tracker' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
@@ -496,6 +497,7 @@ export default function App() {
               
               <button
                 onClick={() => setCurrentView('history')}
+                aria-current={currentView === 'history' ? 'page' : undefined}
                 className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
                   currentView === 'history' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
@@ -506,7 +508,7 @@ export default function App() {
                 <HistoryIcon size={13} />
                 <span>Histórico</span>
               </button>
-            </div>
+            </nav>
             
           </div>
         </div>
@@ -544,8 +546,10 @@ export default function App() {
                 </div>
                 
                 {/* Clean Toggle Switch between A, B & C */}
-                <div className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-60">
+                <div role="tablist" aria-label="Selecionar Ficha de Treino" className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-60">
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'A'}
                     onClick={() => {
                       setActiveRoutine('A');
                       setSearchQuery('');
@@ -560,6 +564,8 @@ export default function App() {
                   </button>
                   
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'B'}
                     onClick={() => {
                       setActiveRoutine('B');
                       setSearchQuery('');
@@ -574,6 +580,8 @@ export default function App() {
                   </button>
 
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'C'}
                     onClick={() => {
                       setActiveRoutine('C');
                       setSearchQuery('');
