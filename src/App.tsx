@@ -484,7 +484,7 @@ export default function App() {
             <div className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
               <button
                 onClick={() => setCurrentView('tracker')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                   currentView === 'tracker' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
@@ -496,7 +496,7 @@ export default function App() {
               
               <button
                 onClick={() => setCurrentView('history')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                   currentView === 'history' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
@@ -550,7 +550,7 @@ export default function App() {
                       setActiveRoutine('A');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                     style={{
                       backgroundColor: activeRoutine === 'A' ? ACCENT_A : 'transparent',
                       color: activeRoutine === 'A' ? '#000000' : '#71717a'
@@ -564,7 +564,7 @@ export default function App() {
                       setActiveRoutine('B');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                     style={{
                       backgroundColor: activeRoutine === 'B' ? ACCENT_B : 'transparent',
                       color: activeRoutine === 'B' ? '#000000' : '#71717a'
@@ -578,7 +578,7 @@ export default function App() {
                       setActiveRoutine('C');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                     style={{
                       backgroundColor: activeRoutine === 'C' ? ACCENT_C : 'transparent',
                       color: activeRoutine === 'C' ? '#000000' : '#71717a'
@@ -680,7 +680,7 @@ export default function App() {
                       key={group}
                       type="button"
                       onClick={() => setSearchQuery(isActive ? '' : group)}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 ${
+                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                         isActive
                           ? 'text-black font-bold border-transparent'
                           : 'text-zinc-400 border-[#222] bg-[#0a0a0a] hover:border-zinc-500 hover:text-white'
@@ -726,7 +726,7 @@ export default function App() {
             <div className="grid grid-cols-2 gap-3 pt-2 select-none">
               <button
                 onClick={handleResetSession}
-                className="flex items-center justify-center gap-2 py-3 bg-[#0a0a0a] text-zinc-350 hover:text-white hover:bg-[#111] rounded-xl border border-[#222] transition-colors font-display text-xs font-bold uppercase tracking-widest"
+                className="flex items-center justify-center gap-2 py-3 bg-[#0a0a0a] text-zinc-350 hover:text-white hover:bg-[#111] rounded-xl border border-[#222] transition-colors font-display text-xs font-bold uppercase tracking-widest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
               >
                 <RotateCcw size={14} />
                 <span>Resetar Série</span>
@@ -734,7 +734,7 @@ export default function App() {
 
               <button
                 onClick={handleFinalizeWorkout}
-                className="flex items-center justify-center gap-2 py-3 rounded-xl transition-all font-display text-xs font-black text-black uppercase tracking-widest shadow-lg active:scale-95"
+                className="flex items-center justify-center gap-2 py-3 rounded-xl transition-all font-display text-xs font-black text-black uppercase tracking-widest shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
                 style={{ 
                   backgroundColor: activeAccentColor,
                   boxShadow: `0 4px 14px -4px ${activeAccentColor}80`

@@ -111,7 +111,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
             <button
               type="button"
               onClick={onNavigateToTracker}
-              className="px-4 py-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] hover:border-[#444] text-white text-xs font-display font-bold uppercase tracking-wider rounded-xl transition-all"
+              className="px-4 py-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] hover:border-[#444] text-white text-xs font-display font-bold uppercase tracking-wider rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
             >
               Começar Treino
             </button>
