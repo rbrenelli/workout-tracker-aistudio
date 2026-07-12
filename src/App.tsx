@@ -192,22 +192,20 @@ export default function App() {
   };
 
   // Calculated session stats based on exercise level completion
-  const getSessionProgress = () => {
-    const totalExercises = exercises.length;
-    let completedExercises = 0;
+  const { completedExercises, totalExercises, percent } = useMemo(() => {
+    const total = exercises.length;
+    let completed = 0;
 
     exercises.forEach((ex) => {
       const session = activeSession[ex.id];
       if (session && session.completed) {
-        completedExercises++;
+        completed++;
       }
     });
 
-    const percent = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
-    return { completedExercises, totalExercises, percent };
-  };
-
-  const { completedExercises, totalExercises, percent } = getSessionProgress();
+    const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+    return { completedExercises: completed, totalExercises: total, percent: pct };
+  }, [exercises, activeSession]);
 
   // Reset active session
   const handleResetSession = () => {
