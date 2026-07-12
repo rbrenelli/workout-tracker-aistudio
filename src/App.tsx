@@ -20,7 +20,6 @@ import {
   X,
   Sparkles,
   RefreshCw,
-  Clock,
   ExternalLink
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
