@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
-  Play, 
   RotateCcw, 
   History as HistoryIcon, 
   Dumbbell, 
