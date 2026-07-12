@@ -51,12 +51,33 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Loaded database references
-  const exercises = activeRoutine === 'A' ? EXERCISES_SERIE_A : activeRoutine === 'B' ? EXERCISES_SERIE_B : EXERCISES_SERIE_C;
+  const ROUTINE_CONFIG = {
+    A: {
+      exercises: EXERCISES_SERIE_A,
+      accent: ACCENT_A,
+      title: 'Série A: Posterior, Coxas e Puxada (Costas)',
+    },
+    B: {
+      exercises: EXERCISES_SERIE_B,
+      accent: ACCENT_B,
+      title: 'Série B: Anterior, Pernas e Empurrar (Peito/Ombro)',
+    },
+    C: {
+      exercises: EXERCISES_SERIE_C,
+      accent: ACCENT_C,
+      title: 'Série C: Treino Personalizado (Puxada, Peito & Braços)',
+    }
+  };
+
+  const exercises = ROUTINE_CONFIG[activeRoutine].exercises;
+  const activeAccentColor = ROUTINE_CONFIG[activeRoutine].accent;
 
   // Workout state loaders
-  const [sessionA, setSessionA] = useState<ExerciseSessionState>({});
-  const [sessionB, setSessionB] = useState<ExerciseSessionState>({});
-  const [sessionC, setSessionC] = useState<ExerciseSessionState>({});
+  const [sessions, setSessions] = useState<Record<RoutineType, ExerciseSessionState>>({
+    A: {},
+    B: {},
+    C: {}
+  });
   const [history, setHistory] = useState<WorkoutHistoryEntry[]>([]);
   
   // Confetti / Celebration HUD State
@@ -86,33 +107,22 @@ export default function App() {
 
   // Init and load states
   useEffect(() => {
-    setSessionA(loadActiveSession('A', EXERCISES_SERIE_A));
-    setSessionB(loadActiveSession('B', EXERCISES_SERIE_B));
-    setSessionC(loadActiveSession('C', EXERCISES_SERIE_C));
+    setSessions({
+      A: loadActiveSession('A', EXERCISES_SERIE_A),
+      B: loadActiveSession('B', EXERCISES_SERIE_B),
+      C: loadActiveSession('C', EXERCISES_SERIE_C)
+    });
     setHistory(loadHistory());
   }, []);
 
   // Sync state changes back to storage
   useEffect(() => {
-    if (Object.keys(sessionA).length > 0) {
-      saveActiveSession('A', sessionA);
-    }
-  }, [sessionA]);
+    if (Object.keys(sessions.A).length > 0) saveActiveSession('A', sessions.A);
+    if (Object.keys(sessions.B).length > 0) saveActiveSession('B', sessions.B);
+    if (Object.keys(sessions.C).length > 0) saveActiveSession('C', sessions.C);
+  }, [sessions]);
 
-  useEffect(() => {
-    if (Object.keys(sessionB).length > 0) {
-      saveActiveSession('B', sessionB);
-    }
-  }, [sessionB]);
-
-  useEffect(() => {
-    if (Object.keys(sessionC).length > 0) {
-      saveActiveSession('C', sessionC);
-    }
-  }, [sessionC]);
-
-  const activeSession = activeRoutine === 'A' ? sessionA : activeRoutine === 'B' ? sessionB : sessionC;
-  const activeAccentColor = activeRoutine === 'A' ? ACCENT_A : activeRoutine === 'B' ? ACCENT_B : ACCENT_C;
+  const activeSession = sessions[activeRoutine];
 
   // Precompute the most recently logged weight (carga) for all exercises in history
   const previousCargas = useMemo(() => {
@@ -157,13 +167,10 @@ export default function App() {
       return { ...prev, [exerciseId]: updated };
     };
 
-    if (activeRoutine === 'A') {
-      setSessionA(prev => updateSessionState(prev));
-    } else if (activeRoutine === 'B') {
-      setSessionB(prev => updateSessionState(prev));
-    } else {
-      setSessionC(prev => updateSessionState(prev));
-    }
+    setSessions(prev => ({
+      ...prev,
+      [activeRoutine]: updateSessionState(prev[activeRoutine])
+    }));
   };
 
   // Rest Timer launcher
@@ -219,13 +226,7 @@ export default function App() {
       variant: 'danger',
       onConfirm: () => {
         const empty: ExerciseSessionState = {};
-        const targetExercises = activeRoutine === 'A' 
-          ? EXERCISES_SERIE_A 
-          : activeRoutine === 'B' 
-            ? EXERCISES_SERIE_B 
-            : EXERCISES_SERIE_C;
-        
-        targetExercises.forEach((ex) => {
+        exercises.forEach((ex) => {
           empty[ex.id] = {
             weight: '',
             completed: false,
@@ -233,13 +234,10 @@ export default function App() {
           };
         });
 
-        if (activeRoutine === 'A') {
-          setSessionA(empty);
-        } else if (activeRoutine === 'B') {
-          setSessionB(empty);
-        } else {
-          setSessionC(empty);
-        }
+        setSessions(prev => ({
+          ...prev,
+          [activeRoutine]: empty
+        }));
         setDialog(null);
       }
     });
@@ -336,13 +334,10 @@ export default function App() {
       };
     });
 
-    if (activeRoutine === 'A') {
-      setSessionA(cleanedSession);
-    } else if (activeRoutine === 'B') {
-      setSessionB(cleanedSession);
-    } else {
-      setSessionC(cleanedSession);
-    }
+    setSessions(prev => ({
+      ...prev,
+      [activeRoutine]: cleanedSession
+    }));
   };
 
   // History operations
@@ -381,9 +376,11 @@ export default function App() {
         saveBackupToStorage(backup);
         
         // Refresh States
-        setSessionA(backup.activeA);
-        setSessionB(backup.activeB);
-        setSessionC(backup.activeC || {});
+        setSessions({
+          A: backup.activeA,
+          B: backup.activeB,
+          C: backup.activeC || {}
+        });
         setHistory(backup.history);
 
         setDialog({
@@ -597,12 +594,7 @@ export default function App() {
                     style={{ backgroundColor: activeAccentColor }}
                   />
                   <h2 className="text-sm font-display font-bold text-white tracking-tight uppercase">
-                    {activeRoutine === 'A' 
-                      ? 'Série A: Posterior, Coxas e Puxada (Costas)' 
-                      : activeRoutine === 'B'
-                        ? 'Série B: Anterior, Pernas e Empurrar (Peito/Ombro)'
-                        : 'Série C: Treino Personalizado (Puxada, Peito & Braços)'
-                    }
+                    {ROUTINE_CONFIG[activeRoutine].title}
                   </h2>
                 </div>
                 
