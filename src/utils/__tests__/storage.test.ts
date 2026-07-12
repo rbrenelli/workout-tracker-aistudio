@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { 
   parseAndValidateBackup, 
   loadActiveSession, 
-  createEmptySession 
+  createEmptySession,
+  saveBackupToStorage
 } from '../storage';
 import { ExerciseSessionState } from '../../types';
 
@@ -133,6 +134,46 @@ describe('storage.ts', () => {
         "ex1": { weight: "25", completed: true, completedSets: 3 },
         "ex2": { weight: "10", completed: false, completedSets: 0 }
       });
+    });
+  });
+
+  describe('saveBackupToStorage', () => {
+    it('should save all backup parts to localStorage correctly', () => {
+      const spy = vi.spyOn(Storage.prototype, 'setItem');
+
+      const mockBackup = {
+        activeA: {
+          "exA1": { weight: "10", completed: true, completedSets: 3 }
+        },
+        activeB: {
+          "exB1": { weight: "20", completed: false, completedSets: 1 }
+        },
+        activeC: {
+          "exC1": { weight: "", completed: false, completedSets: 0 }
+        },
+        history: [
+          {
+            id: "hist1",
+            date: "2026-06-28",
+            routine: "A" as const,
+            completedExercisesCount: 1,
+            totalExercisesCount: 3,
+            logs: {
+              "exA1": { weight: "10", completed: true, completedSets: 3 }
+            }
+          }
+        ]
+      };
+
+      saveBackupToStorage(mockBackup);
+
+      expect(spy).toHaveBeenCalledTimes(4);
+      expect(spy).toHaveBeenCalledWith('gym_active_session_A', JSON.stringify(mockBackup.activeA));
+      expect(spy).toHaveBeenCalledWith('gym_active_session_B', JSON.stringify(mockBackup.activeB));
+      expect(spy).toHaveBeenCalledWith('gym_active_session_C', JSON.stringify(mockBackup.activeC));
+      expect(spy).toHaveBeenCalledWith('gym_workout_history', JSON.stringify(mockBackup.history));
+
+      spy.mockRestore();
     });
   });
 });
