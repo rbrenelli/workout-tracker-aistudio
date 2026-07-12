@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { Calendar, Trash2, Award, History, ChevronRight, ChevronDown, Check, Sparkles } from 'lucide-react';
+import { Calendar, Trash2, Award, History, ChevronRight, ChevronDown, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WorkoutHistoryEntry } from '../types';
 import { EXERCISES_SERIE_A, EXERCISES_SERIE_B } from '../data';
