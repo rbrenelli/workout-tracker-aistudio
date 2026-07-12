@@ -19,7 +19,6 @@ import {
   Calendar,
   X,
   Sparkles,
-  RefreshCw,
   Clock,
   ExternalLink
 } from 'lucide-react';
