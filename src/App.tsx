@@ -413,11 +413,14 @@ export default function App() {
   };
 
   // Text-based exercise search filter
-  const filteredExercises = exercises.filter(ex => 
-    ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    ex.muscleGroup.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    ex.equipment.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredExercises = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return exercises.filter(ex =>
+      ex.name.toLowerCase().includes(query) ||
+      ex.muscleGroup.toLowerCase().includes(query) ||
+      ex.equipment.toLowerCase().includes(query)
+    );
+  }, [exercises, searchQuery]);
 
   // Derive unique muscle groups for quick-filter chips
   const muscleGroups = useMemo(() => {
