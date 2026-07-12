@@ -20,8 +20,7 @@ import {
   X,
   Sparkles,
   RefreshCw,
-  Clock,
-  ExternalLink
+  Clock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from './data';
