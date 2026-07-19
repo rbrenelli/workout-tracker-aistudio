@@ -132,7 +132,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     instructions: [
       'Ajuste o apoio de coxas para firmar o quadril.',
       'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
-      'Inicie o movimento puxando os cotovelos para baixo and para trás.',
+      'Inicie o movimento puxando os cotovelos para baixo e para trás.',
       'Leve a barra ou apoios até a altura do queixo, estufando o peito no final.',
       'Retorne devagar estendendo totalmente os braços, alongando as costas.'
     ],
@@ -179,7 +179,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
   },
   {
     id: 'a10',
-    name: 'Bíceps Pulley',
+    name: 'Pulldown Bíceps no Pulley',
     defaultSets: 3,
     defaultReps: '10',
     muscleGroup: 'Bíceps',
@@ -204,7 +204,7 @@ export const EXERCISES_SERIE_A: Exercise[] = [
     muscleGroup: 'Cardiovascular',
     targetMuscles: ['Sistema Cardiovascular', 'Quadríceps', 'Panturrilhas'],
     equipment: 'Esteira Ergométrica',
-    images: ['images/Esteira Corrida.png'],
+    images: ['images/Esteira Caminhada.png'],
     instructions: [
       'Inicie com um aquecimento lento por 3 a 5 minutos.',
       'Aumente a velocidade ou inclinação para um nível moderado (zona de queima de gordura/aeróbica).',
@@ -234,7 +234,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
       'Flexione os joelhos para baixo e para trás, trazendo os calcanhares abaixo da cadeira.',
       'Retorne estendendo lentamente as pernas de volta.'
     ],
-    tips: 'Mantenha os pés fletidos (dedos apontados para o teto) para recrutar mais intensamente os posteriores.',
+    tips: 'Mantenha os pies fletidos (dedos apontados para o teto) para recrutar mais intensamente os posteriores.',
     svgType: 'leg_curl'
   },
   {
@@ -323,7 +323,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     equipment: 'Máquina de Supino Horizontal Articulada',
     images: ['images/Supino Reto Máquina.png'],
     instructions: [
-      'Sente-se com as costas bem firmadas e os pés apoiados no chão.',
+      'Sente-se com as costas bem firmadas e os pés apojados no chão.',
       'Ajuste o assento para que as manoplas coincidam com a linha média do peito.',
       'Empurre as manoplas para a frente de maneira explosiva e controlada, estendendo os braços.',
       'Retorne trazendo o peso até rente ao peito de modo lento.',
@@ -430,82 +430,6 @@ export const EXERCISES_SERIE_B: Exercise[] = [
 
 export const EXERCISES_SERIE_C: Exercise[] = [
   {
-    id: 'a7',
-    name: 'Puxada Aberta Máquina c/ Anilha',
-    defaultSets: 3,
-    defaultReps: '10-12',
-    muscleGroup: 'Dorsais',
-    targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Bíceps Braquial'],
-    equipment: 'Máquina de Puxada Convergente / Barra Pulley',
-    images: ['images/Puxada Máquina.png'],
-    instructions: [
-      'Ajuste o apoio de coxas para firmar o quadril.',
-      'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
-      'Inicie o movimento puxando os cotovelos para baixo e para trás.',
-      'Leve a barra ou apoios até a altura do queixo, estufando o peito no final.',
-      'Retorne devagar estendendo totalmente os braços, alongando as costas.'
-    ],
-    tips: 'Foque em puxar com os cotovelos e não com as mãos para isolar melhor as dorsais.',
-    svgType: 'lat_pulldown'
-  },
-  {
-    id: 'a8',
-    name: 'Remada Apoiada PN',
-    defaultSets: 3,
-    defaultReps: '10-12',
-    muscleGroup: 'Costas & Bíceps',
-    targetMuscles: ['Mid-Trapezio', 'Rombóides', 'Latíssimo do Dorso', 'Bíceps'],
-    equipment: 'Aparelho de Remada com Apoio de Peito (Mecânica)',
-    images: ['images/Remada na Máquina.png'],
-    instructions: [
-      'Ajuste a altura do banco para que as mãos fiquem na linha do peito.',
-      'Apoie o esterno firmemente na almofada frontal.',
-      'Segure as manoplas na pegada neutra (palmas voltadas uma para a outra).',
-      'Puxe as manoplas retraindo as escápulas ("fechando as costas") e direcionando cotovelos para trás.',
-      'Retorne alongando a musculatura, resistindo ao peso.'
-    ],
-    tips: 'Mantenha o peito sempre colado no apoio. Não jogue o pescoço para a frente.',
-    svgType: 'chest_supported_row'
-  },
-  {
-    id: 'a9',
-    name: 'Bíceps c/ Barra Reta Livre',
-    defaultSets: 3,
-    defaultReps: '10-12',
-    muscleGroup: 'Bíceps',
-    targetMuscles: ['Bíceps Braquial', 'Braquial', 'Braquiorradial'],
-    equipment: 'Barra Reta Livre (Discos/Anilhas)',
-    images: ['images/Bíceps com Barra Reta Livre.png'],
-    instructions: [
-      'Fique em pé com as pernas na largura do quadril, joelhos relaxados.',
-      'Segure a barra reta com as palmas voltadas para cima (pegada supinada), largura dos ombros.',
-      'Mantenha os cotovelos colados nas laterais do tronco.',
-      'Flexione os braços subindo a barra em direção aos ombros.',
-      'Desça controladamente até o braço quase estender por completo.'
-    ],
-    tips: 'Não balance o tronco para pegar impulso (roubo). Mantenha o corpo perfeitamente ereto.',
-    svgType: 'bicep_curl_bar'
-  },
-  {
-    id: 'a10',
-    name: 'Bíceps Pulley',
-    defaultSets: 3,
-    defaultReps: '10',
-    muscleGroup: 'Bíceps',
-    targetMuscles: ['Bíceps Braquial', 'Braquiorradial'],
-    equipment: 'Estação de Polia (Cabo Inferior com Barra Reta/W)',
-    images: ['images/Pulldown Biceps.png'],
-    instructions: [
-      'Prenda a barra curta no cabo na polia baixa.',
-      'Segure a barra e dê um pequeno passo para trás para tensionar o cabo.',
-      'Cotovelos estabilizados nas costelas.',
-      'Puxe a barra em direção ao peito, apertando o bíceps na parte superior.',
-      'Retorne de forma lenta lutando contra a tração do cabo.'
-    ],
-    tips: 'Cabos mantêm tensão em todo o percurso, tire proveito disso descendo o peso bem devagar.',
-    svgType: 'bicep_pulley'
-  },
-  {
     id: 'b5',
     name: 'Peitoral Sentado Máquina / Fly',
     defaultSets: 3,
@@ -562,6 +486,82 @@ export const EXERCISES_SERIE_C: Exercise[] = [
     svgType: 'incline_hammer_press'
   },
   {
+    id: 'a8',
+    name: 'Remada Apoiada PN',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Costas & Bíceps',
+    targetMuscles: ['Mid-Trapezio', 'Rombóides', 'Latíssimo do Dorso', 'Bíceps'],
+    equipment: 'Aparelho de Remada com Apoio de Peito (Mecânica)',
+    images: ['images/Remada na Máquina.png'],
+    instructions: [
+      'Ajuste a altura do banco para que as mãos fiquem na linha do peito.',
+      'Apoie o esterno firmemente na almofada frontal.',
+      'Segure as manoplas na pegada neutra (palmas voltadas uma para a outra).',
+      'Puxe as manoplas retraindo as escápulas ("fechando as costas") e direcionando cotovelos para trás.',
+      'Retorne alongando a musculatura, resistindo ao peso.'
+    ],
+    tips: 'Mantenha o peito sempre colado no apoio. Não jogue o pescoço para a frente.',
+    svgType: 'chest_supported_row'
+  },
+  {
+    id: 'a7',
+    name: 'Puxada Aberta Máquina c/ Anilha',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Dorsais',
+    targetMuscles: ['Latíssimo do Dorso', 'Redondo Maior', 'Bíceps Braquial'],
+    equipment: 'Máquina de Puxada Convergente / Barra Pulley',
+    images: ['images/Puxada Máquina.png'],
+    instructions: [
+      'Ajuste o apoio de coxas para firmar o quadril.',
+      'Segure a barra com uma pegada bem aberta, palmas voltadas para frente.',
+      'Inicie o movimento puxando os cotovelos para baixo e para trás.',
+      'Leve a barra ou apoios até a altura do queixo, estufando o peito no final.',
+      'Retorne devagar estendendo totalmente os braços, alongando as costas.'
+    ],
+    tips: 'Foque em puxar com os cotovelos e não com as mãos para isolar melhor as dorsais.',
+    svgType: 'lat_pulldown'
+  },
+  {
+    id: 'a10',
+    name: 'Pulldown Bíceps no Pulley',
+    defaultSets: 3,
+    defaultReps: '10',
+    muscleGroup: 'Bíceps',
+    targetMuscles: ['Bíceps Braquial', 'Braquiorradial'],
+    equipment: 'Estação de Polia (Cabo Inferior com Barra Reta/W)',
+    images: ['images/Pulldown Biceps.png'],
+    instructions: [
+      'Prenda a barra curta no cabo na polia baixa.',
+      'Segure a barra e dê um pequeno passo para trás para tensionar o cabo.',
+      'Cotovelos estabilizados nas costelas.',
+      'Puxe a barra em direção ao peito, apertando o bíceps na parte superior.',
+      'Retorne de forma lenta lutando contra a tração do cabo.'
+    ],
+    tips: 'Cabos mantêm tensão em todo o percurso, tire proveito disso descendo o peso bem devagar.',
+    svgType: 'bicep_pulley'
+  },
+  {
+    id: 'a9',
+    name: 'Bíceps c/ Barra Reta Livre',
+    defaultSets: 3,
+    defaultReps: '10-12',
+    muscleGroup: 'Bíceps',
+    targetMuscles: ['Bíceps Braquial', 'Braquial', 'Braquiorradial'],
+    equipment: 'Barra Reta Livre (Discos/Anilhas)',
+    images: ['images/Bíceps com Barra Reta Livre.png'],
+    instructions: [
+      'Fique em pé com as pernas na largura do quadril, joelhos relaxados.',
+      'Segure a barra reta com as palmas voltadas para cima (pegada supinada), largura dos ombros.',
+      'Mantenha os cotovelos colados nas laterais do tronco.',
+      'Flexione os braços subindo a barra em direção aos ombros.',
+      'Desça controladamente até o braço quase estender por completo.'
+    ],
+    tips: 'Não balance o tronco para pegar impulso (roubo). Mantenha o corpo perfeitamente ereto.',
+    svgType: 'bicep_curl_bar'
+  },
+  {
     id: 'b8',
     name: 'Elevação Lateral / Abdução de Ombros com Halter',
     defaultSets: 3,
@@ -597,5 +597,24 @@ export const EXERCISES_SERIE_C: Exercise[] = [
     ],
     tips: 'Concentre o movimento no abdômen, sem puxar com os braços ou usar impulso das pernas.',
     svgType: 'crunch_machine'
+  },
+  {
+    id: 'c3',
+    name: 'Caminhada na Esteira',
+    defaultSets: 1,
+    defaultReps: '20-30m',
+    muscleGroup: 'Cardiovascular',
+    targetMuscles: ['Sistema Cardiovascular', 'Quadríceps', 'Panturrilhas'],
+    equipment: 'Esteira Ergométrica',
+    images: ['images/Esteira Caminhada.png'],
+    instructions: [
+      'Suba na esteira e prenda a chave de segurança na roupa.',
+      'Inicie com velocidade baixa (3.0 a 4.0 km/h) para aquecer por 3 minutos.',
+      'Aumente para uma velocidade de caminhada acelerada e confortável (5.0 a 6.0 km/h).',
+      'Mantenha a postura ereta, olhando para a frente, e movimente os braços ritmadamente.',
+      'Nos últimos 3 minutos, reduza a velocidade de forma gradual para resfriamento.'
+    ],
+    tips: 'Mantenha um ritmo firme e ative o abdômen para proteger a postura durante a caminhada.',
+    svgType: 'treadmill'
   }
 ];
