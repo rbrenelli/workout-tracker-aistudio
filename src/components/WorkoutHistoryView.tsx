@@ -230,7 +230,9 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
 
                                 <div className="text-right space-y-1">
                                   <div className="text-[13.5px] font-mono font-black text-amber-500">
-                                    {session.weight ? `${session.weight} kg` : 'Sem Carga'}
+                                    {session.weight 
+                                      ? (getExerciseGroup(exId) === 'Cardiovascular' ? `${session.weight} min` : `${session.weight} kg`) 
+                                      : (getExerciseGroup(exId) === 'Cardiovascular' ? 'Sem Tempo' : 'Sem Carga')}
                                   </div>
                                   <div className="text-[11px] uppercase font-sans font-black tracking-wider">
                                     {session.completed ? (

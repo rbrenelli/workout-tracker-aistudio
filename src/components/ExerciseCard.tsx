@@ -190,31 +190,31 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
       {/* Simplified, Single Weight Tracking Bar at bottom */}
       <div className="border-t border-[#222] px-4 py-3 bg-[#111] flex items-center justify-between gap-4 flex-wrap xs:flex-nowrap">
-        {/* Input for Weight Carga */}
+        {/* Input for Weight Carga / Cardio Duration */}
         <div className="flex flex-col">
           <label 
             htmlFor={`weight-input-${exercise.id}`}
             className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest font-black leading-none mb-1 cursor-pointer"
           >
-            Carga
+            {exercise.muscleGroup === 'Cardiovascular' ? 'Tempo' : 'Carga'}
           </label>
           <div className="relative flex items-center w-36">
             <input
               type="text"
               id={`weight-input-${exercise.id}`}
-              inputMode="decimal"
+              inputMode={exercise.muscleGroup === 'Cardiovascular' ? 'text' : 'decimal'}
               value={session.weight}
               onChange={(e) => onExerciseChange(exercise.id, 'weight', e.target.value)}
-              placeholder={previousCarga || "0"}
-              aria-label={`Carga em quilogramas para ${exercise.name}`}
-              className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-zinc-550 focus:ring-2 focus:ring-zinc-700 rounded-lg py-1.5 pl-3 pr-8 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-all"
+              placeholder={previousCarga || (exercise.muscleGroup === 'Cardiovascular' ? "20" : "0")}
+              aria-label={exercise.muscleGroup === 'Cardiovascular' ? `Tempo em minutos para ${exercise.name}` : `Carga em quilogramas para ${exercise.name}`}
+              className="w-full bg-[#1a1a1a] border border-[#2e2e2e] focus:border-zinc-550 focus:ring-2 focus:ring-zinc-700 rounded-lg py-1.5 pl-3 pr-10 text-left text-white font-mono text-[15.5px] font-black focus:outline-none transition-all"
               style={{
                 borderLeftColor: session.weight ? accentColor : undefined,
                 borderLeftWidth: session.weight ? '3px' : undefined,
               }}
             />
             <span className="absolute right-2.5 text-[11.5px] font-mono text-zinc-500 font-bold uppercase select-none pointer-events-none" aria-hidden="true">
-              kg
+              {exercise.muscleGroup === 'Cardiovascular' ? 'min' : 'kg'}
             </span>
           </div>
         </div>
