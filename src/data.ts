@@ -283,7 +283,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Panturrilhas',
     targetMuscles: ['Gastrocnêmio Lateral', 'Gastrocnêmio Medial', 'Sóleu'],
     equipment: 'Degrau, Gaiola de Panturrilha ou Máquina em Pé',
-    images: ['images/Agachamento Barra Máquina.png'],
+    images: ['images/Panturrilha em Pé.png'],
     instructions: [
       'Apoie apenas a ponta dos pés na borda de um degrau ou plataforma.',
       'Se posicione ereto. Use o corrimão para equilíbrio se for livre.',
@@ -321,7 +321,7 @@ export const EXERCISES_SERIE_B: Exercise[] = [
     muscleGroup: 'Peitoral & Tríceps',
     targetMuscles: ['Pectoralis Major', 'Tríceps Braquial', 'Deltoide Anterior'],
     equipment: 'Máquina de Supino Horizontal Articulada',
-    images: ['images/Hammer Inclinado.png'],
+    images: ['images/Supino Reto Máquina.png'],
     instructions: [
       'Sente-se com as costas bem firmadas e os pés apoiados no chão.',
       'Ajuste o assento para que as manoplas coincidam com a linha média do peito.',
