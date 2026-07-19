@@ -7,7 +7,7 @@ import React, { useState, useMemo } from 'react';
 import { Calendar, Trash2, Award, History, ChevronRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WorkoutHistoryEntry } from '../types';
-import { EXERCISES_SERIE_A, EXERCISES_SERIE_B } from '../data';
+import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from '../data';
 
 interface WorkoutHistoryViewProps {
   history: WorkoutHistoryEntry[];
@@ -15,6 +15,7 @@ interface WorkoutHistoryViewProps {
   onClearHistory: () => void;
   accentColorA: string;
   accentColorB: string;
+  accentColorC?: string;
   onNavigateToTracker?: () => void; // Callback to switch to tracker view
 }
 
@@ -24,6 +25,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
   onClearHistory,
   accentColorA,
   accentColorB,
+  accentColorC = '#ff6b00',
   onNavigateToTracker,
 }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -38,6 +40,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
     const map = new Map<string, typeof EXERCISES_SERIE_A[number]>();
     EXERCISES_SERIE_A.forEach(ex => map.set(ex.id, ex));
     EXERCISES_SERIE_B.forEach(ex => map.set(ex.id, ex));
+    EXERCISES_SERIE_C.forEach(ex => map.set(ex.id, ex));
     return map;
   }, []);
 
@@ -121,11 +124,16 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
         <div className="space-y-3">
           {history.map((entry) => {
             const isA = entry.routine === 'A';
-            const accentColor = isA ? accentColorA : accentColorB;
+            const isB = entry.routine === 'B';
+            const accentColor = isA ? accentColorA : isB ? accentColorB : accentColorC;
             const isExpanded = expandedId === entry.id;
 
             // Formatted date
-            const routineLabel = isA ? 'Série A (Coxas e Puxada)' : 'Série B (Pernas e Supino)';
+            const routineLabel = isA 
+              ? 'Série A (Coxas e Puxada)' 
+              : isB 
+                ? 'Série B (Pernas e Supino)' 
+                : 'Série C (Treino Personalizado)';
 
             return (
               <div
@@ -138,7 +146,7 @@ export const WorkoutHistoryView: React.FC<WorkoutHistoryViewProps> = ({
                   role="button"
                   tabIndex={0}
                   aria-expanded={isExpanded}
-                  aria-label={`${entry.routine === 'A' ? 'Série A' : 'Série B'}, ${entry.date}. ${isExpanded ? 'Recolher detalhes' : 'Expandir detalhes'}`}
+                  aria-label={`Série ${entry.routine}, ${entry.date}. ${isExpanded ? 'Recolher detalhes' : 'Expandir detalhes'}`}
                   onClick={() => toggleExpand(entry.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {

@@ -755,6 +755,7 @@ export default function App() {
             onClearHistory={handleClearAllHistory}
             accentColorA={ACCENT_A}
             accentColorB={ACCENT_B}
+            accentColorC={ACCENT_C}
             onNavigateToTracker={() => setCurrentView('tracker')}
           />
         )}

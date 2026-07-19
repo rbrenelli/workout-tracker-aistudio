@@ -1,0 +1,970 @@
+{
+  "version": 1,
+  "exportedAt": "2026-07-17T19:41:49.108Z",
+  "activeA": {
+    "a1": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a2": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a3": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a4": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a5": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a6": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a7": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a8": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a9": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a10": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a11": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    }
+  },
+  "activeB": {
+    "b1": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b2": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b3": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b4": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b5": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b6": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b7": {
+      "weight": "10",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b8": {
+      "weight": "2",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b9": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b10": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b11": {
+      "weight": "",
+      "completed": false,
+      "completedSets": 0
+    }
+  },
+  "activeC": {
+    "a7": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a8": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a9": {
+      "weight": "8",
+      "completed": false,
+      "completedSets": 0
+    },
+    "a10": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b5": {
+      "weight": "25",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b7": {
+      "weight": "20",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b8": {
+      "weight": "2",
+      "completed": false,
+      "completedSets": 0
+    },
+    "b10": {
+      "weight": "19",
+      "completed": false,
+      "completedSets": 0
+    }
+  },
+  "history": [
+    {
+      "id": "1782242031652",
+      "date": "23 de jun. de 2026, 16:13",
+      "routine": "A",
+      "completedExercisesCount": 4,
+      "totalExercisesCount": 11,
+      "logs": {
+        "a1": {
+          "weight": "",
+          "completed": false
+        },
+        "a2": {
+          "weight": "",
+          "completed": false
+        },
+        "a3": {
+          "weight": "",
+          "completed": false
+        },
+        "a4": {
+          "weight": "",
+          "completed": false
+        },
+        "a5": {
+          "weight": "",
+          "completed": false
+        },
+        "a6": {
+          "weight": "",
+          "completed": false
+        },
+        "a7": {
+          "weight": "20",
+          "completed": true
+        },
+        "a8": {
+          "weight": "",
+          "completed": true
+        },
+        "a9": {
+          "weight": "",
+          "completed": true
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true
+        },
+        "a11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782242037553",
+      "date": "23 de jun. de 2026, 16:13",
+      "routine": "B",
+      "completedExercisesCount": 5,
+      "totalExercisesCount": 11,
+      "logs": {
+        "b1": {
+          "weight": "",
+          "completed": false
+        },
+        "b2": {
+          "weight": "",
+          "completed": false
+        },
+        "b3": {
+          "weight": "",
+          "completed": false
+        },
+        "b4": {
+          "weight": "",
+          "completed": false
+        },
+        "b5": {
+          "weight": "20",
+          "completed": true
+        },
+        "b6": {
+          "weight": "",
+          "completed": false
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true
+        },
+        "b9": {
+          "weight": "",
+          "completed": true
+        },
+        "b10": {
+          "weight": "",
+          "completed": true
+        },
+        "b11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782403277287",
+      "date": "25 de jun. de 2026, 13:01",
+      "routine": "B",
+      "completedExercisesCount": 4,
+      "totalExercisesCount": 11,
+      "logs": {
+        "b1": {
+          "weight": "",
+          "completed": false
+        },
+        "b2": {
+          "weight": "",
+          "completed": false
+        },
+        "b3": {
+          "weight": "",
+          "completed": false
+        },
+        "b4": {
+          "weight": "",
+          "completed": false
+        },
+        "b5": {
+          "weight": "20",
+          "completed": true
+        },
+        "b6": {
+          "weight": "",
+          "completed": false
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true
+        },
+        "b9": {
+          "weight": "",
+          "completed": false
+        },
+        "b10": {
+          "weight": "20",
+          "completed": true
+        },
+        "b11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782403287812",
+      "date": "25 de jun. de 2026, 13:01",
+      "routine": "A",
+      "completedExercisesCount": 4,
+      "totalExercisesCount": 11,
+      "logs": {
+        "a1": {
+          "weight": "",
+          "completed": false
+        },
+        "a2": {
+          "weight": "",
+          "completed": false
+        },
+        "a3": {
+          "weight": "",
+          "completed": false
+        },
+        "a4": {
+          "weight": "",
+          "completed": false
+        },
+        "a5": {
+          "weight": "",
+          "completed": false
+        },
+        "a6": {
+          "weight": "",
+          "completed": false
+        },
+        "a7": {
+          "weight": "20",
+          "completed": true
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true
+        },
+        "a9": {
+          "weight": "",
+          "completed": true
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true
+        },
+        "a11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782501018034",
+      "date": "26 de jun. de 2026, 16:10",
+      "routine": "A",
+      "completedExercisesCount": 4,
+      "totalExercisesCount": 11,
+      "logs": {
+        "a1": {
+          "weight": "",
+          "completed": false
+        },
+        "a2": {
+          "weight": "",
+          "completed": false
+        },
+        "a3": {
+          "weight": "",
+          "completed": false
+        },
+        "a4": {
+          "weight": "",
+          "completed": false
+        },
+        "a5": {
+          "weight": "",
+          "completed": false
+        },
+        "a6": {
+          "weight": "",
+          "completed": false
+        },
+        "a7": {
+          "weight": "20",
+          "completed": true
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true
+        },
+        "a9": {
+          "weight": "",
+          "completed": true
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true
+        },
+        "a11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782501284170",
+      "date": "26 de jun. de 2026, 16:14",
+      "routine": "B",
+      "completedExercisesCount": 4,
+      "totalExercisesCount": 11,
+      "logs": {
+        "b1": {
+          "weight": "",
+          "completed": false
+        },
+        "b2": {
+          "weight": "",
+          "completed": false
+        },
+        "b3": {
+          "weight": "",
+          "completed": false
+        },
+        "b4": {
+          "weight": "",
+          "completed": false
+        },
+        "b5": {
+          "weight": "20",
+          "completed": true
+        },
+        "b6": {
+          "weight": "",
+          "completed": false
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true
+        },
+        "b9": {
+          "weight": "",
+          "completed": false
+        },
+        "b10": {
+          "weight": "20",
+          "completed": true
+        },
+        "b11": {
+          "weight": "",
+          "completed": false
+        }
+      }
+    },
+    {
+      "id": "1782743214628",
+      "date": "29 de jun. de 2026, 11:26",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1782932380555",
+      "date": "1 de jul. de 2026, 15:59",
+      "routine": "C",
+      "completedExercisesCount": 7,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "",
+          "completed": false,
+          "completedSets": 0
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1783020704118",
+      "date": "2 de jul. de 2026, 16:31",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "10",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1783364456746",
+      "date": "6 de jul. de 2026, 16:00",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1783623085358",
+      "date": "9 de jul. de 2026, 15:51",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1783711853062",
+      "date": "10 de jul. de 2026, 16:30",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1783972510016",
+      "date": "13 de jul. de 2026, 16:55",
+      "routine": "C",
+      "completedExercisesCount": 6,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": false,
+          "completedSets": 0
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": false,
+          "completedSets": 0
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1784143270765",
+      "date": "15 de jul. de 2026, 16:21",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1784232895829",
+      "date": "16 de jul. de 2026, 17:14",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    },
+    {
+      "id": "1784317303226",
+      "date": "17 de jul. de 2026, 16:41",
+      "routine": "C",
+      "completedExercisesCount": 8,
+      "totalExercisesCount": 8,
+      "logs": {
+        "a7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a8": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a9": {
+          "weight": "8",
+          "completed": true,
+          "completedSets": 3
+        },
+        "a10": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b5": {
+          "weight": "25",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b7": {
+          "weight": "20",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b8": {
+          "weight": "2",
+          "completed": true,
+          "completedSets": 3
+        },
+        "b10": {
+          "weight": "19",
+          "completed": true,
+          "completedSets": 3
+        }
+      }
+    }
+  ]
+}
