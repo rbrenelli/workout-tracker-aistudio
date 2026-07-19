@@ -526,22 +526,22 @@ export const EXERCISES_SERIE_C: Exercise[] = [
   },
   {
     id: 'c2',
-    name: 'Pec Deck Invertido',
+    name: 'Pec Deck',
     defaultSets: 3,
     defaultReps: '10-12',
-    muscleGroup: 'Ombros (Posterior)',
-    targetMuscles: ['Deltoide Posterior', 'Trapézio', 'Rombóides'],
-    equipment: 'Máquina Pec Deck (Invertido)',
+    muscleGroup: 'Peitoral',
+    targetMuscles: ['Pectoralis Major', 'Deltoide Anterior'],
+    equipment: 'Máquina Pec Deck',
     images: ['images/Peck Deck Invertido.png'],
     instructions: [
-      'Ajuste o assento para que as manoplas fiquem na altura dos ombros.',
-      'Sente-se de frente para o aparelho, apoiando o peito no encosto.',
-      'Segure as manoplas com as palmas voltadas para dentro ou para baixo.',
-      'Empurre os braços para trás em um movimento de arco horizontal.',
-      'Retorne devagar até a posição inicial, mantendo a tensão.'
+      'Ajuste o assento para que as manoplas fiquem na altura do peito.',
+      'Sente-se com as costas apoiadas firmemente no encosto.',
+      'Segure as manoplas com as palmas voltadas para a frente e cotovelos levemente flexionados.',
+      'Aproxime os braços à frente do corpo em um movimento controlado, contraindo o peitoral.',
+      'Retorne devagar até sentir o alongamento do peito, mantendo o controle da carga.'
     ],
-    tips: 'Mantenha o peito colado no encosto e controle a descida para não deixar as placas de peso baterem.',
-    svgType: 'reverse_pec_fly'
+    tips: 'Mantenha os ombros relaxados e as escápulas presas contra o encosto durante toda a execução.',
+    svgType: 'pec_fly'
   },
   {
     id: 'b7',
