@@ -5,23 +5,16 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
-  Play, 
   RotateCcw, 
   History as HistoryIcon, 
   Dumbbell, 
   CheckCircle2, 
   Download, 
   Upload, 
-  Volume2, 
   Activity,
   Search,
   Check,
-  Calendar,
-  X,
-  Sparkles,
-  RefreshCw,
-  Clock,
-  ExternalLink
+  X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from './data';
@@ -199,22 +192,20 @@ export default function App() {
   };
 
   // Calculated session stats based on exercise level completion
-  const getSessionProgress = () => {
-    const totalExercises = exercises.length;
-    let completedExercises = 0;
+  const { completedExercises, totalExercises, percent } = useMemo(() => {
+    const total = exercises.length;
+    let completed = 0;
 
     exercises.forEach((ex) => {
       const session = activeSession[ex.id];
       if (session && session.completed) {
-        completedExercises++;
+        completed++;
       }
     });
 
-    const percent = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
-    return { completedExercises, totalExercises, percent };
-  };
-
-  const { completedExercises, totalExercises, percent } = getSessionProgress();
+    const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+    return { completedExercises: completed, totalExercises: total, percent: pct };
+  }, [exercises, activeSession]);
 
   // Reset active session
   const handleResetSession = () => {
@@ -410,11 +401,14 @@ export default function App() {
   };
 
   // Text-based exercise search filter
-  const filteredExercises = exercises.filter(ex => 
-    ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    ex.muscleGroup.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    ex.equipment.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredExercises = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return exercises.filter(ex => 
+      ex.name.toLowerCase().includes(query) ||
+      ex.muscleGroup.toLowerCase().includes(query) ||
+      ex.equipment.toLowerCase().includes(query)
+    );
+  }, [exercises, searchQuery]);
 
   // Derive unique muscle groups for quick-filter chips
   const muscleGroups = useMemo(() => {
@@ -478,32 +472,34 @@ export default function App() {
             </div>
 
             {/* View navigation Tabs */}
-            <div className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
+            <nav aria-label="Navegação de visualização" className="flex items-center bg-[#111] border border-[#222] p-0.5 rounded-xl">
               <button
                 onClick={() => setCurrentView('tracker')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
+                aria-current={currentView === 'tracker' ? 'page' : undefined}
+                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
                   currentView === 'tracker' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <Activity size={13} />
+                <Activity size={13} aria-hidden="true" />
                 <span>Painel</span>
               </button>
               
               <button
                 onClick={() => setCurrentView('history')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 ${
+                aria-current={currentView === 'history' ? 'page' : undefined}
+                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
                   currentView === 'history' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
                 }`}
                 id="history-tab-button"
               >
-                <HistoryIcon size={13} />
+                <HistoryIcon size={13} aria-hidden="true" />
                 <span>Histórico</span>
               </button>
-            </div>
+            </nav>
             
           </div>
         </div>
@@ -541,13 +537,15 @@ export default function App() {
                 </div>
                 
                 {/* Clean Toggle Switch between A, B & C */}
-                <div className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-60">
+                <div role="tablist" aria-label="Selecionar Ficha de Treino" className="flex items-center bg-[#1a1a1a] border border-[#333] p-1 rounded-xl w-60">
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'A'}
                     onClick={() => {
                       setActiveRoutine('A');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'A' ? ACCENT_A : 'transparent',
                       color: activeRoutine === 'A' ? '#000000' : '#71717a'
@@ -557,11 +555,13 @@ export default function App() {
                   </button>
                   
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'B'}
                     onClick={() => {
                       setActiveRoutine('B');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'B' ? ACCENT_B : 'transparent',
                       color: activeRoutine === 'B' ? '#000000' : '#71717a'
@@ -571,11 +571,13 @@ export default function App() {
                   </button>
 
                   <button
+                    role="tab"
+                    aria-selected={activeRoutine === 'C'}
                     onClick={() => {
                       setActiveRoutine('C');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative"
+                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'C' ? ACCENT_C : 'transparent',
                       color: activeRoutine === 'C' ? '#000000' : '#71717a'
@@ -671,8 +673,9 @@ export default function App() {
                     <button
                       key={group}
                       type="button"
+                      aria-pressed={isActive}
                       onClick={() => setSearchQuery(isActive ? '' : group)}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 ${
+                      className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                         isActive
                           ? 'text-black font-bold border-transparent'
                           : 'text-zinc-400 border-[#222] bg-[#0a0a0a] hover:border-zinc-500 hover:text-white'
@@ -690,8 +693,15 @@ export default function App() {
 
             {/* Interactive Exercise Cards */}
             {filteredExercises.length === 0 ? (
-              <div className="text-center py-8 px-4 bg-[#0a0a0a] border border-zinc-900 border-dashed rounded-xl">
-                <p className="text-xs text-zinc-400 font-sans">Nenhum exercício corresponde ao seu filtro.</p>
+              <div className="text-center py-8 px-4 bg-[#0a0a0a] border border-[#222] border-dashed rounded-xl flex flex-col items-center justify-center space-y-4">
+                <p className="text-sm text-zinc-450 font-sans">Nenhum exercício corresponde ao seu filtro.</p>
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="px-4 py-2 bg-[#1a1a1a] hover:bg-[#222] border border-[#333] hover:border-[#444] text-white text-xs font-display font-bold uppercase tracking-wider rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-650"
+                >
+                  Limpar Busca
+                </button>
               </div>
             ) : (
               <div className="space-y-4">

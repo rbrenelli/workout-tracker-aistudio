@@ -1,13 +1,26 @@
 /// <reference types="vitest" />
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vitest/config';
 
-export default defineConfig(() => {
+export default defineConfig(async () => {
+  const plugins = [react()];
+  
+  const nodeMajorVersion = parseInt(process.versions.node.split('.')[0], 10);
+  if (nodeMajorVersion >= 20) {
+    try {
+      const tailwind = await import('@tailwindcss/vite');
+      plugins.push(tailwind.default());
+    } catch (e) {
+      console.warn('Warning: Tailwind CSS plugin could not be loaded:', e);
+    }
+  } else {
+    console.warn(`Warning: Node version is ${process.versions.node}. Tailwind CSS Vite plugin requires Node >= 20. Skipping styling plugin for this process.`);
+  }
+
   return {
     base: process.env.GITHUB_PAGES === 'true' ? '/workout-tracker-aistudio/' : '/',
-    plugins: [react(), tailwindcss()],
+    plugins,
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -27,3 +40,4 @@ export default defineConfig(() => {
     },
   };
 });
+
