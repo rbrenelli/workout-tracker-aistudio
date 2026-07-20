@@ -68,20 +68,33 @@ describe('ExerciseCard Component', () => {
     // Instructions should not be visible initially since showGuide is false
     expect(screen.queryByText('Posicione os pés na plataforma')).not.toBeInTheDocument();
 
-    // Click on the card header to expand
+    // Click on the card header to expand guide
     const header = screen.getByRole('button', { name: /instruções para leg press 45º/i });
     fireEvent.click(header);
 
-    // Instructions should now be visible
-    expect(screen.getByText('Posicione os pés na plataforma')).toBeInTheDocument();
+    // Tips should be visible but specific instructions should still be hidden
     expect(screen.getByText('Mantenha os joelhos alinhados com a ponta dos pés.')).toBeInTheDocument();
+    expect(screen.queryByText('Posicione os pés na plataforma')).not.toBeInTheDocument();
 
-    // Click again to collapse
+    // Click on "Como Executar" to expand instructions
+    const instructionsToggle = screen.getByRole('button', { name: /como executar/i });
+    fireEvent.click(instructionsToggle);
+
+    // Specific instructions should now be visible
+    expect(screen.getByText('Posicione os pés na plataforma')).toBeInTheDocument();
+
+    // Click again to collapse instructions
+    fireEvent.click(instructionsToggle);
+    await waitFor(() => {
+      expect(screen.queryByText('Posicione os pés na plataforma')).not.toBeInTheDocument();
+    });
+
+    // Click again to collapse guide
     fireEvent.click(header);
 
     // Wait for Framer Motion exit animation to finish and the element to be unmounted
     await waitFor(() => {
-      expect(screen.queryByText('Posicione os pés na plataforma')).not.toBeInTheDocument();
+      expect(screen.queryByText('Mantenha os joelhos alinhados com a ponta dos pés.')).not.toBeInTheDocument();
     });
   });
 

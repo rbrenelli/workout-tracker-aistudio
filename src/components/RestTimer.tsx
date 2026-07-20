@@ -136,9 +136,9 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           <button
             onClick={onClose}
             aria-label="Fechar cronômetro"
-            className="text-zinc-400 hover:text-white p-1 rounded-full hover:bg-[#1a1a1a] transition-colors"
+            className="w-12 h-12 flex items-center justify-center text-zinc-400 hover:text-white rounded-full hover:bg-[#1a1a1a] transition-colors"
           >
-            <X size={14} />
+            <X size={20} />
           </button>
         </motion.div>
       ) : (
@@ -182,10 +182,10 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               <h3 className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
               <button
                 onClick={onClose}
-                className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222]"
+                className="w-12 h-12 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#111] rounded-lg transition-colors border border-transparent hover:border-[#222]"
                 aria-label="Fechar descanso"
               >
-                <X size={18} />
+                <X size={24} />
               </button>
             </div>
 
@@ -274,22 +274,22 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               <button
                 onClick={() => adjustTime(-10)}
                 disabled={timeLeft <= 10}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none"
+                className="flex items-center justify-center w-12 h-12 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none"
                 title="Remover 10 segundos"
                 aria-label="Remover 10 segundos"
               >
-                <Minus size={16} />
+                <Minus size={20} />
               </button>
               <div className="px-3 py-1 bg-[#111] rounded-full border border-[#222] select-none">
                 <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wide">Ajustar Tempo</span>
               </div>
               <button
                 onClick={() => adjustTime(10)}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
+                className="flex items-center justify-center w-12 h-12 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
                 title="Adicionar 10 segundos"
                 aria-label="Adicionar 10 segundos"
               >
-                <Plus size={16} />
+                <Plus size={20} />
               </button>
             </div>
 

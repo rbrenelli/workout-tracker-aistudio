@@ -14,6 +14,7 @@ import {
   Activity,
   Search,
   Check,
+  Sparkles,
   X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -40,7 +41,7 @@ const ACCENT_C = '#ff6b00'; // High Density Electric Orange
 export default function App() {
   // Navigation & Routine Selection
   const [currentView, setCurrentView] = useState<'tracker' | 'history'>('tracker');
-  const [activeRoutine, setActiveRoutine] = useState<RoutineType>('A');
+  const [activeRoutine, setActiveRoutine] = useState<RoutineType>('C');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Loaded database references
