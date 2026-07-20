@@ -30,6 +30,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
   previousCarga,
 }) => {
   const [showGuide, setShowGuide] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   return (
     <motion.div
@@ -76,7 +77,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             )}
           </div>
           
-          <h3 className="text-[15.5px] font-display font-black text-zinc-100 tracking-tight leading-snug">
+          <h3 className="text-[15.5px] font-display font-black text-zinc-100 tracking-tight leading-snug line-clamp-2">
             {exercise.name}
           </h3>
           
@@ -94,11 +95,11 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onStartTimer(60, exercise.id); }}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
             title="Iniciar descanso de 60 segundos"
             aria-label="Iniciar cronômetro de descanso de 60 segundos"
           >
-            <Timer size={14} aria-hidden="true" />
+            <Timer size={18} aria-hidden="true" />
           </button>
 
           {/* Expand Details Trigger */}
@@ -107,9 +108,9 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             onClick={(e) => { e.stopPropagation(); setShowGuide(!showGuide); }}
             aria-label={showGuide ? "Ocultar guia do aparelho" : "Exibir guia do aparelho"}
             aria-expanded={showGuide}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
-            {showGuide ? <ChevronUp size={14} aria-hidden="true" /> : <ChevronDown size={14} aria-hidden="true" />}
+            {showGuide ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -124,49 +125,56 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden bg-[#050505] border-t border-[#222]"
           >
-            <div className="p-4 flex flex-col-reverse md:grid md:grid-cols-2 gap-4">
-              {/* Left Column: Visual Images (Placed below instructions on mobile, side-by-side on desktop) */}
-              <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-3 flex flex-col justify-between min-h-[160px] relative">
-                <div className="text-[11.5px] font-mono text-zinc-400 uppercase tracking-widest mb-2 select-none font-bold text-center">
-                  Aparelho a ser utilizado:
-                </div>
-                <div className="text-center mb-4">
-                  <span className="text-[15.5px] font-sans font-bold text-zinc-200 uppercase tracking-wide">
-                    {exercise.equipment}
-                  </span>
-                </div>
-
-                <div className="flex-1 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-thin">
-                  {exercise.images && exercise.images.map((imgUrl, index) => (
-                    <img 
-                      key={index} 
-                      src={imgUrl.startsWith('http') ? imgUrl : `${import.meta.env.BASE_URL}${imgUrl.replace(/^\//, '')}`} 
-                      alt={`${exercise.equipment} ${index + 1}`} 
-                      className="snap-start shrink-0 w-[80%] h-auto rounded-lg shadow-md max-h-[160px] object-contain bg-[#111] p-1 border border-[#333]" 
-                    />
-                  ))}
-                  {(!exercise.images || exercise.images.length === 0) && (
-                     <div className="text-zinc-500 text-xs text-center py-8 w-full">Imagens indisponíveis</div>
-                  )}
-                </div>
+            <div className="p-4 flex flex-col gap-4">
+              {/* Visual Image - Single Image Layout */}
+              <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-3 flex flex-col justify-center items-center min-h-[160px] relative">
+                {exercise.images && exercise.images.length > 0 ? (
+                  <img
+                    src={exercise.images[0].startsWith('http') ? exercise.images[0] : `${import.meta.env.BASE_URL}${exercise.images[0].replace(/^\//, '')}`}
+                    alt={exercise.name}
+                    className="w-[80%] h-auto rounded-lg shadow-md max-h-[200px] object-contain bg-[#111] p-1 border border-[#333]"
+                  />
+                ) : (
+                  <div className="text-zinc-500 text-xs text-center py-8 w-full">Imagem indisponível</div>
+                )}
               </div>
 
-              {/* Right Column: Execution steps & targets */}
-              <div className="flex flex-col justify-between gap-3">
-                <div>
-                  <h4 className="text-[12.5px] font-display font-black text-zinc-400 uppercase tracking-widest mb-1.5">
-                    Como Executar:
-                  </h4>
-                  <ol className="list-decimal list-inside text-[13.5px] text-zinc-400 space-y-1.5 leading-relaxed">
-                    {exercise.instructions.map((step, idx) => (
-                      <li key={idx} className="marker:text-zinc-600 pl-1">
-                        <span className="text-zinc-300">{step}</span>
-                      </li>
-                    ))}
-                  </ol>
+              {/* Execution steps & targets */}
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => setShowInstructions(!showInstructions)}
+                    className="flex items-center justify-between bg-[#111] hover:bg-[#1a1a1a] transition-colors border border-[#222] rounded-lg p-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 w-full"
+                  >
+                    <span className="text-[12.5px] font-display font-black text-zinc-400 uppercase tracking-widest">
+                      Como Executar
+                    </span>
+                    {showInstructions ? <ChevronUp size={16} className="text-zinc-400" /> : <ChevronDown size={16} className="text-zinc-400" />}
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {showInstructions && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="bg-[#0a0a0a] border border-[#222] rounded-lg p-3 mt-1">
+                          <ol className="list-decimal list-inside text-[13.5px] text-zinc-400 space-y-1.5 leading-relaxed">
+                            {exercise.instructions.map((step, idx) => (
+                              <li key={idx} className="marker:text-zinc-600 pl-1">
+                                <span className="text-zinc-300">{step}</span>
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                <div className="border-t border-[#222] pt-2.5">
+                <div className="pt-1 flex flex-col gap-2">
                   <span className="text-[12.5px] text-zinc-400 font-mono flex items-start gap-1">
                     <Dumbbell size={13} className="mt-0.5 shrink-0 text-zinc-400" aria-hidden="true" />
                     <span>
@@ -176,7 +184,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                   </span>
                   
                   {exercise.tips && (
-                    <div className="mt-2 bg-[#111] p-2 rounded-lg border border-[#222] text-[12.5px] text-zinc-400">
+                    <div className="bg-[#111] p-2 rounded-lg border border-[#222] text-[12.5px] text-zinc-400">
                       <span className="text-amber-550 font-bold select-none">Dica de execução: </span>
                       {exercise.tips}
                     </div>
@@ -239,7 +247,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                   }
                 }}
                 aria-label={`Série ${i + 1} de ${exercise.defaultSets}: ${i < session.completedSets ? 'concluída' : 'pendente'}`}
-                className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${
+                className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 transition-all duration-200 ${
                   i < session.completedSets
                     ? 'border-transparent scale-110'
                     : 'border-zinc-600 bg-transparent hover:border-zinc-400'
