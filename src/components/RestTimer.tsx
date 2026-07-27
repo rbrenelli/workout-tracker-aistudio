@@ -136,7 +136,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           <button
             onClick={onClose}
             aria-label="Fechar cronômetro"
-            className="text-zinc-400 hover:text-white p-1 rounded-full hover:bg-[#1a1a1a] transition-colors"
+            className="text-zinc-400 hover:text-white p-1 rounded-full hover:bg-[#1a1a1a] transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center"
           >
             <X size={14} />
           </button>
@@ -173,7 +173,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-sm font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222]"
+                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-sm font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222] min-h-[48px]"
                 title="Minimizar cronômetro para persistir na tela"
               >
                 <Minimize2 size={14} />
@@ -182,7 +182,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               <h3 className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
               <button
                 onClick={onClose}
-                className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222]"
+                className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222] min-w-[48px] min-h-[48px] flex items-center justify-center"
                 aria-label="Fechar descanso"
               >
                 <X size={18} />
@@ -274,7 +274,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               <button
                 onClick={() => adjustTime(-10)}
                 disabled={timeLeft <= 10}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none"
+                className="flex items-center justify-center w-12 h-12 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none"
                 title="Remover 10 segundos"
                 aria-label="Remover 10 segundos"
               >
@@ -285,7 +285,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               </div>
               <button
                 onClick={() => adjustTime(10)}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
+                className="flex items-center justify-center w-12 h-12 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
                 title="Adicionar 10 segundos"
                 aria-label="Adicionar 10 segundos"
               >

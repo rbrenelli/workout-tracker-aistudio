@@ -94,7 +94,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onStartTimer(60, exercise.id); }}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
             title="Iniciar descanso de 60 segundos"
             aria-label="Iniciar cronômetro de descanso de 60 segundos"
           >
@@ -107,7 +107,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             onClick={(e) => { e.stopPropagation(); setShowGuide(!showGuide); }}
             aria-label={showGuide ? "Ocultar guia do aparelho" : "Exibir guia do aparelho"}
             aria-expanded={showGuide}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
             {showGuide ? <ChevronUp size={14} aria-hidden="true" /> : <ChevronDown size={14} aria-hidden="true" />}
           </button>
