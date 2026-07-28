@@ -94,7 +94,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onStartTimer(60, exercise.id); }}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
             title="Iniciar descanso de 60 segundos"
             aria-label="Iniciar cronômetro de descanso de 60 segundos"
           >
@@ -107,7 +107,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             onClick={(e) => { e.stopPropagation(); setShowGuide(!showGuide); }}
             aria-label={showGuide ? "Ocultar guia do aparelho" : "Exibir guia do aparelho"}
             aria-expanded={showGuide}
-            className="p-2 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            className="w-12 h-12 bg-[#1a1a1a] text-zinc-400 hover:text-white hover:bg-[#222] rounded-lg transition-all flex items-center justify-center border border-[#333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
             {showGuide ? <ChevronUp size={14} aria-hidden="true" /> : <ChevronDown size={14} aria-hidden="true" />}
           </button>
@@ -221,7 +221,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
         {/* Set/Series Tracking Dots */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center">
             {Array.from({ length: exercise.defaultSets }, (_, i) => (
               <button
                 key={i}
@@ -239,16 +239,20 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                   }
                 }}
                 aria-label={`Série ${i + 1} de ${exercise.defaultSets}: ${i < session.completedSets ? 'concluída' : 'pendente'}`}
-                className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${
-                  i < session.completedSets
-                    ? 'border-transparent scale-110'
-                    : 'border-zinc-600 bg-transparent hover:border-zinc-400'
-                }`}
-                style={{
-                  backgroundColor: i < session.completedSets ? accentColor : 'transparent',
-                  boxShadow: i < session.completedSets ? `0 0 8px ${accentColor}40` : 'none',
-                }}
-              />
+                className="w-12 h-12 -mx-2 flex items-center justify-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 rounded-full"
+              >
+                <div
+                  className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${
+                    i < session.completedSets
+                      ? 'border-transparent scale-110'
+                      : 'border-zinc-600 bg-transparent group-hover:border-zinc-400'
+                  }`}
+                  style={{
+                    backgroundColor: i < session.completedSets ? accentColor : 'transparent',
+                    boxShadow: i < session.completedSets ? `0 0 8px ${accentColor}40` : 'none',
+                  }}
+                />
+              </button>
             ))}
           </div>
           <span className="text-[11px] font-mono text-zinc-400 font-bold tabular-nums">

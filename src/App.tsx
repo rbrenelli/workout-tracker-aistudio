@@ -518,7 +518,6 @@ export default function App() {
               className="absolute top-2 left-4 right-4 z-30 bg-[#111] border rounded-xl px-4 py-3 text-center shadow-2xl flex items-center justify-center gap-2 text-sm font-display font-bold text-white uppercase tracking-wide"
               style={{ borderColor: activeAccentColor }}
             >
-              <Sparkles size={16} style={{ color: activeAccentColor }} />
               <span>{milestoneMessage}</span>
             </motion.div>
           )}
