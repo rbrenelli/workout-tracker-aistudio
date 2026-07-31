@@ -14,7 +14,8 @@ import {
   Activity,
   Search,
   Check,
-  X
+  X,
+  Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from './data';
