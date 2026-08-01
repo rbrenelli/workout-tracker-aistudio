@@ -34,6 +34,23 @@ export const RestTimer: React.FC<RestTimerProps> = ({
     setIsMinimized(false);
   }, [duration, isOpen]);
 
+  // Handle Escape key to close timer
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isOpen && !isMinimized && event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, isMinimized, onClose]);
+
   // Main countdown logic
   useEffect(() => {
     if (isActive && timeLeft > 0) {
@@ -116,7 +133,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           <button
             onClick={() => setIsMinimized(false)}
             aria-label="Maximizar cronômetro de descanso"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 rounded-full"
           >
             <div className={`relative flex items-center justify-center w-10 h-10 rounded-full border-2 ${isFinished ? 'animate-ping' : ''}`}
                  style={{ borderColor: accentColor }}
@@ -136,7 +153,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           <button
             onClick={onClose}
             aria-label="Fechar cronômetro"
-            className="text-zinc-400 hover:text-white p-1 rounded-full hover:bg-[#1a1a1a] transition-colors"
+            className="text-zinc-400 hover:text-white p-1 rounded-full hover:bg-[#1a1a1a] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
           >
             <X size={14} />
           </button>
@@ -151,6 +168,9 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4"
         >
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="rest-timer-title"
             initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: 20 }}
@@ -173,16 +193,16 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-sm font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222]"
+                className="text-zinc-400 hover:text-white flex items-center gap-1.5 text-sm font-display hover:bg-[#111] px-2.5 py-1.5 rounded-lg transition-all border border-transparent hover:border-[#222] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                 title="Minimizar cronômetro para persistir na tela"
               >
                 <Minimize2 size={14} />
                 <span>Minimizar</span>
               </button>
-              <h3 className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
+              <h3 id="rest-timer-title" className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
               <button
                 onClick={onClose}
-                className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222]"
+                className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                 aria-label="Fechar descanso"
               >
                 <X size={18} />
@@ -201,7 +221,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
                       navigator.vibrate([10]);
                     }
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all border ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 ${
                     timeLeft === preset && isActive
                       ? 'border-transparent text-black font-black'
                       : 'border-[#222] text-zinc-400 bg-[#111] hover:bg-[#1a1a1a] hover:text-white'
@@ -274,7 +294,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               <button
                 onClick={() => adjustTime(-10)}
                 disabled={timeLeft <= 10}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-400 hover:bg-[#111] hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                 title="Remover 10 segundos"
                 aria-label="Remover 10 segundos"
               >
@@ -285,7 +305,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               </div>
               <button
                 onClick={() => adjustTime(10)}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-[#222] text-zinc-350 hover:bg-[#111] hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                 title="Adicionar 10 segundos"
                 aria-label="Adicionar 10 segundos"
               >
@@ -297,7 +317,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={handleToggle}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display text-sm font-semibold transition-all"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
                 style={{
                   backgroundColor: isActive ? 'rgba(39, 39, 42, 0.8)' : accentColor,
                   color: isActive ? '#f4f4f5' : '#000000',
@@ -318,7 +338,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
               
               <button
                 onClick={handleReset}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-[#222] text-zinc-350 hover:bg-[#111] transition-colors font-display text-sm font-semibold uppercase tracking-wider"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-[#222] text-zinc-350 hover:bg-[#111] transition-colors font-display text-sm font-semibold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
               >
                 <RotateCcw size={16} />
                 <span>Reiniciar</span>
