@@ -14,7 +14,8 @@ import {
   Activity,
   Search,
   Check,
-  X
+  X,
+  Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EXERCISES_SERIE_A, EXERCISES_SERIE_B, EXERCISES_SERIE_C } from './data';
@@ -81,6 +82,7 @@ export default function App() {
   const [timerOpen, setTimerOpen] = useState(false);
   const [timerDuration, setTimerDuration] = useState(60);
   const [timerExerciseId, setTimerExerciseId] = useState<string | null>(null);
+  const timerStartSetsRef = useRef<number>(0);
 
   // Milestone Toast State
   const [milestoneMessage, setMilestoneMessage] = useState<string | null>(null);
@@ -170,6 +172,11 @@ export default function App() {
   const handleStartTimer = (duration: number, exerciseId?: string) => {
     setTimerDuration(duration);
     setTimerExerciseId(exerciseId || null);
+    if (exerciseId && activeSession[exerciseId]) {
+      timerStartSetsRef.current = activeSession[exerciseId].completedSets || 0;
+    } else {
+      timerStartSetsRef.current = 0;
+    }
     setTimerOpen(true);
   };
 
@@ -178,17 +185,35 @@ export default function App() {
     const exercise = exercises.find(ex => ex.id === timerExerciseId);
     if (!exercise) return;
     
-    const currentSession = activeSession[timerExerciseId] || { weight: '', completed: false, completedSets: 0 };
-    const maxSets = exercise.defaultSets;
-    
-    if (currentSession.completedSets < maxSets) {
-      const newSets = currentSession.completedSets + 1;
-      const nowComplete = newSets >= maxSets;
-      handleExerciseChange(timerExerciseId, 'completedSets', newSets);
-      if (nowComplete) {
-        handleExerciseChange(timerExerciseId, 'completed', true);
+    setSessions(prev => {
+      const currentRoutineSession = prev[activeRoutine] || {};
+      const currentSession = currentRoutineSession[timerExerciseId] || { weight: '', completed: false, completedSets: 0 };
+      const maxSets = exercise.defaultSets;
+      const targetSet = timerStartSetsRef.current + 1;
+      
+      // Only increment if current completedSets has not already met/exceeded targetSet AND is less than maxSets
+      if (currentSession.completedSets < targetSet && currentSession.completedSets < maxSets) {
+        const newSets = currentSession.completedSets + 1;
+        const nowComplete = newSets >= maxSets;
+        const updatedWeight = (nowComplete && !currentSession.weight && previousCargas[timerExerciseId])
+          ? previousCargas[timerExerciseId]
+          : currentSession.weight;
+
+        return {
+          ...prev,
+          [activeRoutine]: {
+            ...currentRoutineSession,
+            [timerExerciseId]: {
+              ...currentSession,
+              completedSets: newSets,
+              completed: nowComplete ? true : currentSession.completed,
+              weight: updatedWeight
+            }
+          }
+        };
       }
-    }
+      return prev;
+    });
   };
 
   // Calculated session stats based on exercise level completion

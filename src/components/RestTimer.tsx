@@ -26,31 +26,32 @@ export const RestTimer: React.FC<RestTimerProps> = ({
   const [isActive, setIsActive] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const hasFiredRef = useRef<boolean>(false);
 
   // Restart timer when a new one is requested
   useEffect(() => {
     setTimeLeft(duration);
     setIsActive(true);
     setIsMinimized(false);
+    hasFiredRef.current = false;
   }, [duration, isOpen]);
 
   // Main countdown logic
   useEffect(() => {
-    if (isActive && timeLeft > 0) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            triggerCompletionAlert();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
+    if (!isActive) return;
+
+    if (timeLeft <= 0) {
+      setIsActive(false);
+      if (!hasFiredRef.current) {
+        hasFiredRef.current = true;
+        triggerCompletionAlert();
       }
+      return;
     }
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
 
     return () => {
       if (timerRef.current) {
@@ -63,7 +64,11 @@ export const RestTimer: React.FC<RestTimerProps> = ({
   const triggerCompletionAlert = () => {
     // 1. Vibrate device
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
-      navigator.vibrate([300, 150, 300, 150, 400]);
+      try {
+        navigator.vibrate([300, 150, 300, 150, 400]);
+      } catch {
+        // Ignore vibration errors on unsupported devices
+      }
     }
 
     // 2. Fire completion callback
@@ -79,10 +84,17 @@ export const RestTimer: React.FC<RestTimerProps> = ({
   const handleReset = () => {
     setTimeLeft(duration);
     setIsActive(true);
+    hasFiredRef.current = false;
   };
 
   const adjustTime = (amount: number) => {
-    setTimeLeft((prev) => Math.max(0, prev + amount));
+    setTimeLeft((prev) => {
+      const next = Math.max(0, prev + amount);
+      if (next > 0) {
+        hasFiredRef.current = false;
+      }
+      return next;
+    });
   };
 
   if (!isOpen) return null;
