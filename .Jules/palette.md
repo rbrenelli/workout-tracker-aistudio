@@ -1,0 +1,3 @@
+## 2024-08-02 - [Accessibility] Custom modal accessibility requires manual ARIA roles and keyboard handlers
+**Learning:** I found out that `RestTimer` custom modal created using Framer Motion (`motion.div`) in this codebase lacked native dialog semantics and keyboard bindings compared to the native `<dialog>` element.
+**Action:** When working with custom modals in this app, explicitly bind an Escape key listener in a `useEffect` hook to close it, add `role="dialog"` and `aria-modal="true"`, map the title with `aria-labelledby`, and ensure interactive elements inside use `focus-visible` styles for better keyboard discoverability.
