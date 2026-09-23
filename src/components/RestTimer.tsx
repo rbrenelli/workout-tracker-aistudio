@@ -36,6 +36,23 @@ export const RestTimer: React.FC<RestTimerProps> = ({
     hasFiredRef.current = false;
   }, [duration, isOpen]);
 
+  // Keyboard accessibility: Escape to close
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isOpen && !isMinimized && event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen && !isMinimized) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, isMinimized, onClose]);
+
   // Main countdown logic
   useEffect(() => {
     if (!isActive) return;
@@ -163,6 +180,9 @@ export const RestTimer: React.FC<RestTimerProps> = ({
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md px-4"
         >
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="rest-timer-title"
             initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: 20 }}
@@ -191,7 +211,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
                 <Minimize2 size={14} />
                 <span>Minimizar</span>
               </button>
-              <h3 className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
+              <h3 id="rest-timer-title" className="text-base font-display font-medium text-zinc-300">Tempo de Descanso</h3>
               <button
                 onClick={onClose}
                 className="text-zinc-400 hover:text-white hover:bg-[#111] p-1.5 rounded-lg transition-colors border border-transparent hover:border-[#222]"
