@@ -501,7 +501,7 @@ export default function App() {
               <button
                 onClick={() => setCurrentView('tracker')}
                 aria-current={currentView === 'tracker' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
+                className={`min-h-[48px] px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
                   currentView === 'tracker' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
@@ -514,7 +514,7 @@ export default function App() {
               <button
                 onClick={() => setCurrentView('history')}
                 aria-current={currentView === 'history' ? 'page' : undefined}
-                className={`px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
+                className={`min-h-[48px] px-3 py-1.5 rounded-lg text-xs font-display font-semibold transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550 ${
                   currentView === 'history' 
                     ? 'bg-[#222] border border-[#333] text-white shadow' 
                     : 'text-zinc-400 hover:text-white'
@@ -570,7 +570,7 @@ export default function App() {
                       setActiveRoutine('A');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
+                    className="min-h-[48px] flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'A' ? ACCENT_A : 'transparent',
                       color: activeRoutine === 'A' ? '#000000' : '#71717a'
@@ -586,7 +586,7 @@ export default function App() {
                       setActiveRoutine('B');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
+                    className="min-h-[48px] flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'B' ? ACCENT_B : 'transparent',
                       color: activeRoutine === 'B' ? '#000000' : '#71717a'
@@ -602,7 +602,7 @@ export default function App() {
                       setActiveRoutine('C');
                       setSearchQuery('');
                     }}
-                    className="flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
+                    className="min-h-[48px] flex-1 py-1.5 text-[10px] font-display font-black rounded-lg transition-all text-center relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-550"
                     style={{
                       backgroundColor: activeRoutine === 'C' ? ACCENT_C : 'transparent',
                       color: activeRoutine === 'C' ? '#000000' : '#71717a'
